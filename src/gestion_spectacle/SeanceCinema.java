@@ -7,7 +7,11 @@ public class SeanceCinema extends Seance {
     
     @Override
     public int nbPlacesDispo() {
+<<<<<<< HEAD
 	// TODO Auto-generated method stub //chat
+=======
+	// TODO Auto-generated method stub //chien
+>>>>>>> branch 'master' of https://github.com/Lumenol/Projet_JAVA.git
 	return 0;
     }
 
