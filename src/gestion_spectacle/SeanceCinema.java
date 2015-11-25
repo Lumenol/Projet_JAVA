@@ -13,7 +13,7 @@ public class SeanceCinema extends Seance {
 
     @Override
     public int totalCendu() {
-	// TODO Auto-generated method stub
+	// TODO Auto-generated method stub //nogit
 	return 0;
     }
 
