@@ -7,7 +7,7 @@ public class SeanceCinema extends Seance {
     
     @Override
     public int nbPlacesDispo() {
-	// TODO Auto-generated method stub //nogit
+	// TODO Auto-generated method stub //chien
 	return 0;
     }
 
