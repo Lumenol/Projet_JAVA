@@ -11,6 +11,7 @@ public class Programmation {
     }
 
     public double chiffreAffaire() {
+	return 0;
 	
     }
 }

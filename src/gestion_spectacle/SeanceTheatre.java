@@ -23,6 +23,7 @@ public class SeanceTheatre extends Seance {
     }
 
     public int nbFauteuilsDispo() {
+	return nbFauteuilsVendus;
 
     }
 
