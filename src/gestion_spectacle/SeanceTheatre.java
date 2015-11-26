@@ -1,17 +1,45 @@
 package gestion_spectacle;
 
 public class SeanceTheatre extends Seance {
-    private SalleTheatre salleTheatre;
     private int nbFauteuilsVendus;
 
+    private SalleTheatre salleTheatre;
+
     @Override
-    public int nbPlacesDispo() {
-	// TODO Auto-generated method stub
-	return 0;
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (!super.equals(obj))
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	SeanceTheatre other = (SeanceTheatre) obj;
+	if (nbFauteuilsVendus != other.nbFauteuilsVendus)
+	    return false;
+	if (salleTheatre == null) {
+	    if (other.salleTheatre != null)
+		return false;
+	} else if (!salleTheatre.equals(other.salleTheatre))
+	    return false;
+	return true;
     }
 
     @Override
-    public int totalCendu() {
+    public int hashCode() {
+	final int prime = 31;
+	int result = super.hashCode();
+	result = prime * result + nbFauteuilsVendus;
+	result = prime * result + ((salleTheatre == null) ? 0 : salleTheatre.hashCode());
+	return result;
+    }
+
+    public int nbFauteuilsDispo() {
+	return nbFauteuilsVendus;
+
+    }
+
+    @Override
+    public int nbPlacesDispo() {
 	// TODO Auto-generated method stub
 	return 0;
     }
@@ -22,9 +50,15 @@ public class SeanceTheatre extends Seance {
 	return 0;
     }
 
-    public int nbFauteuilsDispo() {
-	return nbFauteuilsVendus;
+    @Override
+    public String toString() {
+	return "SeanceTheatre [salleTheatre=" + salleTheatre + ", nbFauteuilsVendus=" + nbFauteuilsVendus + "]";
+    }
 
+    @Override
+    public int totalCendu() {
+	// TODO Auto-generated method stub
+	return 0;
     }
 
     public void vendrePlacesFauteuil(int nbre) {
