@@ -38,6 +38,15 @@ public class Salle {
 	return true;
     }
 
+    public int getCapacite() {
+        return capacite;
+    }
+
+    public double getTarif() {
+	// TODO Auto-generated method stub
+	return tarif;
+    }
+
     @Override
     public int hashCode() {
 	final int prime = 31;

@@ -1,9 +1,11 @@
 package gestion_spectacle;
 
 public abstract class Seance implements Comparable<Seance> {
-    private Heure horaire;
+    protected Heure horaire;
 
-    private int jour, nbPlacesVenduesTN;
+    protected int jour, nbPlacesVenduesTN;
+
+    public abstract double chiffreAffaire();
 
     @Override
     public int compareTo(Seance o) {
@@ -14,34 +16,6 @@ public abstract class Seance implements Comparable<Seance> {
 	} else {
 	    return horaire.compareTo(o.horaire);
 	}
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Seance other = (Seance) obj;
-	if (horaire == null) {
-	    if (other.horaire != null)
-		return false;
-	} else if (!horaire.equals(other.horaire))
-	    return false;
-	if (jour != other.jour)
-	    return false;
-	return true;
-    }
-
-    @Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((horaire == null) ? 0 : horaire.hashCode());
-	result = prime * result + jour;
-	return result;
     }
 
     public abstract int nbPlacesDispo();
@@ -56,6 +30,7 @@ public abstract class Seance implements Comparable<Seance> {
     public abstract int totalVendu();
 
     public void vendrePlacesTN(int nbre) {
+	nbPlacesVenduesTN += nbre;
     }
 
 }

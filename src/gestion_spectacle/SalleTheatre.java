@@ -28,6 +28,14 @@ public class SalleTheatre extends Salle {
 	return true;
     }
 
+    public int getNbFauteuils() {
+        return nbFauteuils;
+    }
+
+    public double getPrixFauteuil() {
+        return prixFauteuil;
+    }
+
     @Override
     public int hashCode() {
 	final int prime = 31;

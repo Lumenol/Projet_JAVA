@@ -6,21 +6,28 @@ public class SeanceCinema extends Seance {
 
     private Salle salle;
 
+    
+    @Override
+    public double chiffreAffaire() {
+	// TODO Auto-generated method stub
+	return salle.getTarif()*(nbPlacesVenduesTN+0.6*nbPlacesVenduesTR);
+    }
+
     @Override
     public boolean equals(Object obj) {
 	if (this == obj)
 	    return true;
-	if (!super.equals(obj))
+	if (obj == null)
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	SeanceCinema other = (SeanceCinema) obj;
-	if (nbPlacesVenduesTR != other.nbPlacesVenduesTR)
-	    return false;
-	if (salle == null) {
-	    if (other.salle != null)
+	Seance other = (Seance) obj;
+	if (horaire == null) {
+	    if (other.horaire != null)
 		return false;
-	} else if (!salle.equals(other.salle))
+	} else if (!horaire.equals(other.horaire))
+	    return false;
+	if (jour != other.jour)
 	    return false;
 	return true;
     }
@@ -28,7 +35,7 @@ public class SeanceCinema extends Seance {
     @Override
     public int hashCode() {
 	final int prime = 31;
-	int result = super.hashCode();
+	int result = 1;
 	result = prime * result + nbPlacesVenduesTR;
 	result = prime * result + ((salle == null) ? 0 : salle.hashCode());
 	return result;
@@ -36,14 +43,13 @@ public class SeanceCinema extends Seance {
 
     @Override
     public int nbPlacesDispo() {
-	// TODO Auto-generated method stub
-	return 0;
+	return salle.getCapacite() - totalVendu();
     }
 
     @Override
     public double tauxRemplissage() {
 	// TODO Auto-generated method stub
-	return 0;
+	return totalVendu() * 100.0 / salle.getCapacite();
     }
 
     @Override
@@ -53,12 +59,22 @@ public class SeanceCinema extends Seance {
 
     @Override
     public int totalVendu() {
-	// TODO Auto-generated method stub
-	return 0;
+	return nbPlacesVenduesTN + nbPlacesVenduesTR;
     }
 
-    public void vendrePlacesTR(int nbre) {
+    @Override
+    public void vendrePlacesTN(int nbre) throws IllegalArgumentException {
+	if (nbPlacesDispo() < nbre) {
+	    throw new IllegalArgumentException("Nombre de place insufisant");
+	}
+	super.vendrePlacesTN(nbre);
+    }
 
+    public void vendrePlacesTR(int nbre) throws IllegalArgumentException {
+	if (nbPlacesDispo() < nbre) {
+	    throw new IllegalArgumentException("Nombre de place insufisant");
+	}
+	nbPlacesVenduesTR += nbre;
     }
 
 }
