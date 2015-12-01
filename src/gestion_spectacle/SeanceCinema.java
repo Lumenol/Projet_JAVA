@@ -52,7 +52,7 @@ public class SeanceCinema extends Seance {
     }
 
     @Override
-    public int totalCendu() {
+    public int totalVendu() {
 	// TODO Auto-generated method stub
 	return 0;
     }

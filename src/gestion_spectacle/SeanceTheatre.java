@@ -34,7 +34,7 @@ public class SeanceTheatre extends Seance {
     }
 
     public int nbFauteuilsDispo() {
-	return nbFauteuilsVendus;
+	return 0;
 
     }
 
@@ -56,7 +56,7 @@ public class SeanceTheatre extends Seance {
     }
 
     @Override
-    public int totalCendu() {
+    public int totalVendu() {
 	// TODO Auto-generated method stub
 	return 0;
     }

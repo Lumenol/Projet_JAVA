@@ -53,7 +53,7 @@ public abstract class Seance implements Comparable<Seance> {
 	return "Seance [jour=" + jour + ", nbPlacesVenduesTN=" + nbPlacesVenduesTN + ", horaire=" + horaire + "]";
     }
 
-    public abstract int totalCendu();
+    public abstract int totalVendu();
 
     public void vendrePlacesTN(int nbre) {
     }
