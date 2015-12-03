@@ -40,10 +40,6 @@ public class Salle {
 	return nomSalle;
     }
 
-    public void setNomSalle(String nomSalle) {
-	this.nomSalle = nomSalle;
-    }
-
     public double getTarif() {
 	// TODO Auto-generated method stub
 	return tarif;
@@ -55,6 +51,10 @@ public class Salle {
 	int result = 1;
 	result = prime * result + ((nomSalle == null) ? 0 : nomSalle.hashCode());
 	return result;
+    }
+
+    public void setNomSalle(String nomSalle) {
+	this.nomSalle = nomSalle;
     }
 
     @Override

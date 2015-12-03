@@ -12,12 +12,17 @@ public abstract class Seance implements Comparable<Seance> {
 	nbPlacesVenduesTN = 0;
     }
 
+    public abstract double chiffreAffaire();
+
     @Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + jour;
-	return result;
+    public int compareTo(Seance o) {
+	if (jour < o.jour) {
+	    return -1;
+	} else if (jour > o.jour) {
+	    return 1;
+	} else {
+	    return horaire.compareTo(o.horaire);
+	}
     }
 
     @Override
@@ -46,17 +51,12 @@ public abstract class Seance implements Comparable<Seance> {
 	return nbPlacesVenduesTN;
     }
 
-    public abstract double chiffreAffaire();
-
     @Override
-    public int compareTo(Seance o) {
-	if (jour < o.jour) {
-	    return -1;
-	} else if (jour > o.jour) {
-	    return 1;
-	} else {
-	    return horaire.compareTo(o.horaire);
-	}
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + jour;
+	return result;
     }
 
     public abstract int nbPlacesDispo();

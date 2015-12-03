@@ -52,20 +52,6 @@ public abstract class Programmation<T extends Seance> implements Iterable<T> {
 	return seances.iterator();
     }
 
-    public void supprimer(T s) {
-	seances.remove(s);
-    }
-
-    @Override
-    public String toString() {
-	StringBuffer b = new StringBuffer();
-	for (Iterator iterator = seances.iterator(); iterator.hasNext();) {
-	    T t = (T) iterator.next();
-	    b.append(t.toString() + "\n");
-	}
-	return b.toString();
-    }
-
     public TreeSet<T> seances(int jour) {
 	TreeSet<T> set = new TreeSet<T>();
 	Iterator<T> it = seances.iterator();
@@ -79,6 +65,20 @@ public abstract class Programmation<T extends Seance> implements Iterable<T> {
 	}
 	return set;
 
+    }
+
+    public void supprimer(T s) {
+	seances.remove(s);
+    }
+
+    @Override
+    public String toString() {
+	StringBuffer b = new StringBuffer();
+	for (Iterator iterator = seances.iterator(); iterator.hasNext();) {
+	    T t = (T) iterator.next();
+	    b.append(t.toString() + "\n");
+	}
+	return b.toString();
     }
 
     protected double tauxRemplissage(Collection<T> c) {

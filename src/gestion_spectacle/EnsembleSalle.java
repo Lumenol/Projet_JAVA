@@ -15,6 +15,31 @@ public class EnsembleSalle implements Iterable {
 	salles.add(salle);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	EnsembleSalle other = (EnsembleSalle) obj;
+	if (salles == null) {
+	    if (other.salles != null)
+		return false;
+	} else if (!salles.equals(other.salles))
+	    return false;
+	return true;
+    }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((salles == null) ? 0 : salles.hashCode());
+	return result;
+    }
+
     public Iterator<Salle> iterator() {
 	return salles.iterator();
     }
@@ -39,31 +64,6 @@ public class EnsembleSalle implements Iterable {
 	    b.append(salle.toString() + "\n");
 	}
 	return b.toString();
-    }
-
-    @Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((salles == null) ? 0 : salles.hashCode());
-	return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	EnsembleSalle other = (EnsembleSalle) obj;
-	if (salles == null) {
-	    if (other.salles != null)
-		return false;
-	} else if (!salles.equals(other.salles))
-	    return false;
-	return true;
     }
 
 }
