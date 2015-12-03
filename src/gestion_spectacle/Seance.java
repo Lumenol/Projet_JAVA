@@ -1,9 +1,28 @@
 package gestion_spectacle;
 
 public abstract class Seance implements Comparable<Seance> {
-    protected Heure horaire;
+    private Heure horaire;
 
-    protected int jour, nbPlacesVenduesTN;
+    private int jour, nbPlacesVenduesTN;
+
+    public Seance(Heure horaire, int jour) {
+	super();
+	this.horaire = horaire;
+	this.jour = jour;
+	nbPlacesVenduesTN = 0;
+    }
+
+    public Heure getHoraire() {
+	return horaire;
+    }
+
+    public int getJour() {
+	return jour;
+    }
+
+    public int getNbPlacesVenduesTN() {
+	return nbPlacesVenduesTN;
+    }
 
     public abstract double chiffreAffaire();
 

@@ -39,7 +39,7 @@ public class Salle {
     }
 
     public int getCapacite() {
-        return capacite;
+	return capacite;
     }
 
     public double getTarif() {

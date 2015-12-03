@@ -29,11 +29,11 @@ public class SalleTheatre extends Salle {
     }
 
     public int getNbFauteuils() {
-        return nbFauteuils;
+	return nbFauteuils;
     }
 
     public double getPrixFauteuil() {
-        return prixFauteuil;
+	return prixFauteuil;
     }
 
     @Override

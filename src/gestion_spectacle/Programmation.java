@@ -1,13 +1,22 @@
 package gestion_spectacle;
 
+import java.util.Iterator;
 import java.util.TreeSet;
 
-public abstract class Programmation {
+public abstract class Programmation<T extends Seance> implements Iterable<T> {
 
-    protected TreeSet<? extends Seance> seances;
+    private TreeSet<T> seances = new TreeSet<T>();
+
+    public void ajouter(T s) {
+	seances.add(s);
+    }
 
     public double chiffreAffaire() {
-	return 0;
+	double chiffreAffaire = 0;
+	for (T seance : seances) {
+	    chiffreAffaire += seance.chiffreAffaire();
+	}
+	return chiffreAffaire;
 
     }
 
@@ -37,8 +46,33 @@ public abstract class Programmation {
     }
 
     @Override
+    public Iterator<T> iterator() {
+	// TODO Auto-generated method stub
+	return seances.iterator();
+    }
+
+    public void supprimer(T s) {
+	seances.remove(s);
+    }
+
+    @Override
     public String toString() {
 	return "Programmation [seances=" + seances + "]";
+    }
+
+    public TreeSet<T> seances(int jour) {
+	TreeSet<T> set = new TreeSet<T>();
+	Iterator<T> it = seances.iterator();
+	int j = -1;
+	while (it.hasNext() && j <= jour) {
+	    T seance = it.next();
+	    j = seance.getJour();
+	    if (j == jour) {
+		set.add(seance);
+	    }
+	}
+	return set;
+
     }
 
 }

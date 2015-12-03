@@ -5,33 +5,16 @@ public class SeanceTheatre extends Seance {
 
     private SalleTheatre salleTheatre;
 
+    public SeanceTheatre(Heure horaire, int jour, SalleTheatre salleTheatre) {
+	super(horaire, jour);
+	this.salleTheatre = salleTheatre;
+	nbFauteuilsVendus = 0;
+    }
+
     @Override
     public double chiffreAffaire() {
 	// TODO Auto-generated method stub
-	return nbPlacesVenduesTN * salleTheatre.getTarif() + nbFauteuilsVendus * salleTheatre.getPrixFauteuil();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Seance other = (Seance) obj;
-	if (jour != other.jour)
-	    return false;
-	return true;
-    }
-
-    @Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + nbFauteuilsVendus;
-	result = prime * result + ((salleTheatre == null) ? 0 : salleTheatre.hashCode());
-	return result;
+	return getNbPlacesVenduesTN() * salleTheatre.getTarif() + nbFauteuilsVendus * salleTheatre.getPrixFauteuil();
     }
 
     public int nbFauteuilsDispo() {
@@ -42,7 +25,7 @@ public class SeanceTheatre extends Seance {
     @Override
     public int nbPlacesDispo() {
 	// TODO Auto-generated method stub
-	return salleTheatre.getCapacite() - nbFauteuilsVendus - nbPlacesVenduesTN;
+	return salleTheatre.getCapacite() - nbFauteuilsVendus - getNbPlacesVenduesTN();
     }
 
     @Override
@@ -59,12 +42,12 @@ public class SeanceTheatre extends Seance {
     @Override
     public int totalVendu() {
 	// TODO Auto-generated method stub
-	return nbPlacesVenduesTN + nbFauteuilsVendus;
+	return getNbPlacesVenduesTN() + nbFauteuilsVendus;
     }
 
     public void vendrePlacesFauteuil(int nbre) throws IllegalArgumentException {
 	if (nbFauteuilsDispo() < nbre) {
-	    throw new IllegalArgumentException("Nombre de fauteuil insufisant");
+	    throw new IllegalArgumentException("Nombre de fauteuil insuffisant");
 	}
 	nbFauteuilsVendus += nbre;
     }
@@ -72,7 +55,7 @@ public class SeanceTheatre extends Seance {
     @Override
     public void vendrePlacesTN(int nbre) throws IllegalArgumentException {
 	if (nbPlacesDispo() < nbre) {
-	    throw new IllegalArgumentException("Nombre de place insufisant");
+	    throw new IllegalArgumentException("Nombre de place insuffisant");
 	}
 	super.vendrePlacesTN(nbre);
     }
