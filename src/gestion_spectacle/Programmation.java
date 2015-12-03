@@ -1,5 +1,6 @@
 package gestion_spectacle;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.TreeSet;
 
@@ -57,7 +58,12 @@ public abstract class Programmation<T extends Seance> implements Iterable<T> {
 
     @Override
     public String toString() {
-	return "Programmation [seances=" + seances + "]";
+	StringBuffer b = new StringBuffer();
+	for (Iterator iterator = seances.iterator(); iterator.hasNext();) {
+	    T t = (T) iterator.next();
+	    b.append(t.toString() + "\n");
+	}
+	return b.toString();
     }
 
     public TreeSet<T> seances(int jour) {
@@ -73,6 +79,15 @@ public abstract class Programmation<T extends Seance> implements Iterable<T> {
 	}
 	return set;
 
+    }
+
+    protected double tauxRemplissage(Collection<T> c) {
+	double taux = 0;
+	for (Iterator iterator = c.iterator(); iterator.hasNext();) {
+	    T t = (T) iterator.next();
+	    taux += t.tauxRemplissage();
+	}
+	return taux / c.size();
     }
 
 }

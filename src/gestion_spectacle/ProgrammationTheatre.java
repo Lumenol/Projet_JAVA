@@ -6,7 +6,12 @@ public class ProgrammationTheatre extends Programmation<SeanceTheatre> {
     }
 
     public double tauxRemplissage(int jour) {
-	return 0;
+	return tauxRemplissage(seances(jour));
+    }
+
+    @Override
+    public String toString() {
+	return "ProgrammationTheatre \n" + super.toString();
     }
 
 }

@@ -44,6 +44,6 @@ public class Film extends Spectacle {
 
     @Override
     public String toString() {
-	return "Film [realisateur=" + realisateur + ", duree=" + duree + "]";
+	return super.toString() + " Film [duree=" + duree + ", realisateur=" + realisateur + "]";
     }
 }

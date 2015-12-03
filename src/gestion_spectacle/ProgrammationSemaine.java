@@ -28,6 +28,43 @@ public class ProgrammationSemaine {
 	return ajouterProgrammation((Spectacle) piece, p);
     }
 
+    @Override
+    public String toString() {
+	StringBuffer b = new StringBuffer("ProgrammationSemaine : semaine : +semaine");
+	for (Spectacle spectacle : programation.keySet()) {
+	    b.append(spectacle.toString() + "\n" + programation.get(spectacle).toString() + "\n");
+	}
+	return b.toString();
+    }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((programation == null) ? 0 : programation.hashCode());
+	result = prime * result + semaine;
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	ProgrammationSemaine other = (ProgrammationSemaine) obj;
+	if (programation == null) {
+	    if (other.programation != null)
+		return false;
+	} else if (!programation.equals(other.programation))
+	    return false;
+	if (semaine != other.semaine)
+	    return false;
+	return true;
+    }
+
     private boolean ajouterProgrammation(Spectacle s, Programmation p) {
 	if (!programation.containsKey(s)) {
 	    programation.put(s, p);

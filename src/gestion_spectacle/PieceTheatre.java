@@ -41,6 +41,7 @@ public class PieceTheatre extends Spectacle {
 
     @Override
     public String toString() {
-	return "PieceTheatre [metteurEnScene=" + metteurEnScene + ", nbEntractes=" + nbEntractes + "]";
+	return super.toString() + " PieceTheatre [metteurEnScene=" + metteurEnScene + ", nbEntractes=" + nbEntractes
+		+ "]";
     }
 }

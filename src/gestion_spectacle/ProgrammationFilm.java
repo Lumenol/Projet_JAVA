@@ -24,7 +24,12 @@ public class ProgrammationFilm extends Programmation<SeanceCinema> {
     }
 
     public double tauxRemplissage(int jour, Heure h) {
-	return 0;
+	return tauxRemplissage(seances(jour, h));
+    }
+
+    @Override
+    public String toString() {
+	return "ProgrammationFilm \n" + super.toString();
     }
 
 }

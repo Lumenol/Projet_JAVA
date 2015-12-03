@@ -40,6 +40,30 @@ public class SeanceCinema extends Seance {
     }
 
     @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	SeanceCinema other = (SeanceCinema) obj;
+	if (getHoraire() == null) {
+	    if (other.getHoraire() != null)
+		return false;
+	} else if (!getHoraire().equals(other.getHoraire()))
+	    return false;
+	if (salle == null) {
+	    if (other.salle != null)
+		return false;
+	} else if (!salle.equals(other.salle))
+	    return false;
+	if (getJour() != other.getJour())
+	    return false;
+	return true;
+    }
+
+    @Override
     public void vendrePlacesTN(int nbre) throws IllegalArgumentException {
 	if (nbPlacesDispo() < nbre) {
 	    throw new IllegalArgumentException("Nombre de place insuffisant");

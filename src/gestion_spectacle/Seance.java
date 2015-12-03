@@ -12,6 +12,28 @@ public abstract class Seance implements Comparable<Seance> {
 	nbPlacesVenduesTN = 0;
     }
 
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + jour;
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	Seance other = (Seance) obj;
+	if (jour != other.jour)
+	    return false;
+	return true;
+    }
+
     public Heure getHoraire() {
 	return horaire;
     }
