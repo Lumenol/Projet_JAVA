@@ -7,6 +7,10 @@ public class Salle {
 
     private double tarif;
 
+    public Salle(String nomSalle, int nbPlacesStandard, double tarif) {
+	this(nomSalle, nbPlacesStandard, nbPlacesStandard, tarif);
+    }
+
     public Salle(String nomSalle, int capacite, int nbPlacesStandard, double tarif) {
 	super();
 	this.nomSalle = nomSalle;
@@ -34,6 +38,10 @@ public class Salle {
 
     public int getCapacite() {
 	return capacite;
+    }
+
+    public int getNbPlacesStandard() {
+	return nbPlacesStandard;
     }
 
     public String getNomSalle() {

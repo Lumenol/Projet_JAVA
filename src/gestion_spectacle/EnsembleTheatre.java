@@ -1,8 +1,8 @@
 package gestion_spectacle;
 
-public class EnsembleSalleTheatre extends EnsembleSalle {
+public class EnsembleTheatre extends EnsembleSalle {
 
-    public EnsembleSalleTheatre() {
+    public EnsembleTheatre() {
     }
 
     @Override
