@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 public class EnsembleSalle implements Iterable, Serializable {
     static public EnsembleSalle charger(String nomFichier) throws FileNotFoundException, IOException {
@@ -26,12 +27,6 @@ public class EnsembleSalle implements Iterable, Serializable {
 	}
 	ois.close();
 	return (EnsembleSalle) obj;
-
-    }
-
-    public static Salle choisirSalle(EnsembleSalle ens) {
-
-	return null;
     }
 
     public static EnsembleSalle ensembleSalle() {
@@ -62,6 +57,31 @@ public class EnsembleSalle implements Iterable, Serializable {
 
     public void ajouter(Salle salle) {
 	salles.add(salle);
+    }
+
+    public Salle choisirSalle() {
+	Scanner sc = new Scanner(System.in);
+	StringTokenizer toka;
+	int index = -1, i = 0;
+	String[] nom = new String[salles.size()];
+	StringBuffer buff = new StringBuffer();
+	for (Iterator iterator = salles.iterator(); iterator.hasNext();) {
+	    Salle salle = (Salle) iterator.next();
+	    buff.append(i + "-" + salle.getNomSalle() + " ");
+	    nom[i] = salle.getNomSalle();
+	    i++;
+	}
+	do {
+	    System.out.println(buff.toString());
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    index = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (index < 0 || index >= salles.size());
+	return salle(nom[index]);
     }
 
     @Override

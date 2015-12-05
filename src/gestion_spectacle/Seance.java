@@ -25,7 +25,7 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {
-		    jour = Integer.valueOf(toka.nextToken());
+		    heure = Integer.valueOf(toka.nextToken());
 		} catch (NumberFormatException e) {
 		}
 	    }
@@ -106,6 +106,8 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
 
     public abstract int nbPlacesDispo();
 
+    public abstract String nomSalle();
+
     public abstract double tauxRemplissage();
 
     @Override
@@ -114,6 +116,8 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
     }
 
     public abstract int totalVendu();
+
+    public abstract void vendre();
 
     public void vendrePlacesTN(int nbre) {
 	nbPlacesVenduesTN += nbre;

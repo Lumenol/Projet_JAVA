@@ -1,16 +1,18 @@
 package gestion_spectacle;
 
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 public class SeanceCinema extends Seance {
+
+    public static SeanceCinema seanceCinema(EnsembleSalle ens) {
+	Object[] seance = Seance.seance();
+	return new SeanceCinema((Heure) seance[0], (int) seance[1], ens.choisirSalle());
+    }
 
     private int nbPlacesVenduesTR;
 
     private Salle salle;
-
-    // public static seanceCinema(){
-    // Object[] seance = Seance.seance();
-    // return new
-    // SeanceCinema(seance[0],seance[1],EnsembleSalle.choisirSalle());
-    // }
 
     public SeanceCinema(Heure horaire, int jour, Salle salle) {
 	super(horaire, jour);
@@ -54,6 +56,12 @@ public class SeanceCinema extends Seance {
     }
 
     @Override
+    public String nomSalle() {
+	// TODO Auto-generated method stub
+	return salle.getNomSalle();
+    }
+
+    @Override
     public double tauxRemplissage() {
 	// TODO Auto-generated method stub
 	return totalVendu() * 100.0 / salle.getCapacite();
@@ -67,6 +75,53 @@ public class SeanceCinema extends Seance {
     @Override
     public int totalVendu() {
 	return getNbPlacesVenduesTN() + nbPlacesVenduesTR;
+    }
+
+    @Override
+    public void vendre() {
+	boolean loop = true;
+	Scanner sc = new Scanner(System.in);
+	int nbPlace = -1;
+	StringTokenizer toka;
+	do {
+	    System.out.println("(n)ormal (t)arif-reduit (r)etour");
+	    switch (sc.nextLine()) {
+	    case "n":
+		do {
+		    System.out.println("Place disponible : " + nbPlacesDispo());
+		    System.out.println("Combient voulez-vous en vendre ?");
+		    toka = new StringTokenizer(sc.nextLine());
+		    if (toka.hasMoreTokens()) {
+			try {
+			    nbPlace = Integer.valueOf(toka.nextToken());
+			} catch (NumberFormatException e) {
+			}
+		    }
+		} while (nbPlace < 0 || nbPlace > nbPlacesDispo());
+		vendrePlacesTN(nbPlace);
+		break;
+
+	    case "t":
+		do {
+		    System.out.println("Place disponible : " + nbPlacesDispo());
+		    System.out.println("Combient voulez-vous en vendre ?");
+		    toka = new StringTokenizer(sc.nextLine());
+		    if (toka.hasMoreTokens()) {
+			try {
+			    nbPlace = Integer.valueOf(toka.nextToken());
+			} catch (NumberFormatException e) {
+			}
+		    }
+		} while (nbPlace < 0 || nbPlace > nbPlacesDispo());
+		vendrePlacesTR(nbPlace);
+		break;
+
+	    case "r":
+		loop = false;
+		break;
+	    }
+
+	} while (loop);
     }
 
     @Override

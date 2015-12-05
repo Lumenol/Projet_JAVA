@@ -1,6 +1,14 @@
 package gestion_spectacle;
 
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 public class SeanceTheatre extends Seance {
+    public static SeanceTheatre seanceTheatre(EnsembleTheatre ens) {
+	Object[] seance = Seance.seance();
+	return new SeanceTheatre((Heure) seance[0], (int) seance[1], (SalleTheatre) ens.choisirSalle());
+    }
+
     private int nbFauteuilsVendus;
 
     private SalleTheatre salleTheatre;
@@ -25,7 +33,17 @@ public class SeanceTheatre extends Seance {
     @Override
     public int nbPlacesDispo() {
 	// TODO Auto-generated method stub
-	return salleTheatre.getCapacite() - nbFauteuilsVendus - getNbPlacesVenduesTN();
+	return nbFauteuilsDispo() + nbPlaceStandardDispo();
+    }
+
+    public int nbPlaceStandardDispo() {
+	return salleTheatre.getNbPlacesStandard() - getNbPlacesVenduesTN();
+    }
+
+    @Override
+    public String nomSalle() {
+	// TODO Auto-generated method stub
+	return salleTheatre.getNomSalle();
     }
 
     @Override
@@ -43,6 +61,53 @@ public class SeanceTheatre extends Seance {
     public int totalVendu() {
 	// TODO Auto-generated method stub
 	return getNbPlacesVenduesTN() + nbFauteuilsVendus;
+    }
+
+    @Override
+    public void vendre() {
+	boolean loop = true;
+	Scanner sc = new Scanner(System.in);
+	int nbPlace = -1;
+	StringTokenizer toka;
+	do {
+	    System.out.println("(n)ormal (t)arif-reduit (r)etour");
+	    switch (sc.nextLine()) {
+	    case "n":
+		do {
+		    System.out.println("Place disponible : " + nbPlaceStandardDispo());
+		    System.out.println("Combient voulez-vous en vendre ?");
+		    toka = new StringTokenizer(sc.nextLine());
+		    if (toka.hasMoreTokens()) {
+			try {
+			    nbPlace = Integer.valueOf(toka.nextToken());
+			} catch (NumberFormatException e) {
+			}
+		    }
+		} while (nbPlace < 0 || nbPlace > nbPlaceStandardDispo());
+		vendrePlacesTN(nbPlace);
+		break;
+
+	    case "t":
+		do {
+		    System.out.println("Fauteuils disponible : " + nbFauteuilsDispo());
+		    System.out.println("Combient voulez-vous en vendre ?");
+		    toka = new StringTokenizer(sc.nextLine());
+		    if (toka.hasMoreTokens()) {
+			try {
+			    nbPlace = Integer.valueOf(toka.nextToken());
+			} catch (NumberFormatException e) {
+			}
+		    }
+		} while (nbPlace < 0 || nbPlace > nbFauteuilsDispo());
+		vendrePlacesFauteuil(nbPlace);
+		break;
+
+	    case "r":
+		loop = false;
+		break;
+	    }
+
+	} while (loop);
     }
 
     public void vendrePlacesFauteuil(int nbre) throws IllegalArgumentException {

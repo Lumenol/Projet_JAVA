@@ -1,9 +1,35 @@
 package gestion_spectacle;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public abstract class Spectacle implements Serializable {
+    public static Spectacle choisirSpectacle(Collection<? extends Spectacle> ens) {
+	Scanner sc = new Scanner(System.in);
+	StringTokenizer toka;
+	int index = -1, i = 0;
+	StringBuffer buff = new StringBuffer();
+	for (Iterator iterator = ens.iterator(); iterator.hasNext();) {
+	    Spectacle spectacle = (Spectacle) iterator.next();
+	    buff.append(i + "-" + spectacle.getTitre() + " ");
+	    i++;
+	}
+	do {
+	    System.out.println(buff.toString());
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    index = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (index < 0 || index >= ens.size());
+	return (Spectacle) ens.toArray()[index];
+    }
+
     protected static String[] spectacle() {
 	Scanner sc = new Scanner(System.in);
 	String[] r = new String[2];

@@ -3,6 +3,8 @@ package gestion_spectacle;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 public abstract class Programmation<T extends Seance> implements Iterable<T>, Serializable {
@@ -20,6 +22,29 @@ public abstract class Programmation<T extends Seance> implements Iterable<T>, Se
 	}
 	return chiffreAffaire;
 
+    }
+
+    public Seance choisirSeance() {
+	Scanner sc = new Scanner(System.in);
+	StringTokenizer toka;
+	int index = -1, i = 0;
+	StringBuffer buff = new StringBuffer();
+	for (Iterator iterator = seances.iterator(); iterator.hasNext();) {
+	    Seance seance = (Seance) iterator.next();
+	    buff.append(i + "-" + seance.getJour() + " " + seance.getHoraire() + " " + seance.nomSalle());
+	    i++;
+	}
+	do {
+	    System.out.println(buff.toString());
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    index = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (index < 0 || index >= seances.size());
+	return (Seance) seances.toArray()[index];
     }
 
     @Override
