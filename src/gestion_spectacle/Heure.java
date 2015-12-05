@@ -1,6 +1,9 @@
 package gestion_spectacle;
 
-public class Heure implements Comparable<Heure> {
+import java.io.Serializable;
+
+public class Heure implements Comparable<Heure>, Serializable {
+
     private int minutes;
 
     public Heure(int minutes) {

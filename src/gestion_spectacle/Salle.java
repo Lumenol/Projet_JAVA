@@ -1,6 +1,43 @@
 package gestion_spectacle;
 
-public class Salle {
+import java.io.Serializable;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class Salle implements Serializable {
+    public static Salle salle() {
+	Scanner sc = new Scanner(System.in);
+	String nomSalle;
+	StringTokenizer toka;
+	int nbPlacesStandard = 0;
+	double tarif = -1;
+	do {
+	    System.out.println("Nom de la salle");
+	    nomSalle = sc.nextLine().trim();
+	} while (nomSalle.equals(""));
+	do {
+	    System.out.println("nbPlacesStandard");
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    nbPlacesStandard = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (nbPlacesStandard <= 0);
+	do {
+	    System.out.println("tarif");
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    tarif = Double.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (tarif < 0);
+	return new Salle(nomSalle, nbPlacesStandard, tarif);
+    }
+
     private int capacite, nbPlacesStandard;
 
     private String nomSalle;

@@ -1,6 +1,23 @@
 package gestion_spectacle;
 
-public abstract class Spectacle {
+import java.io.Serializable;
+import java.util.Scanner;
+
+public abstract class Spectacle implements Serializable {
+    protected static String[] spectacle() {
+	Scanner sc = new Scanner(System.in);
+	String[] r = new String[2];
+	do {
+	    System.out.println("titre");
+	    r[0] = sc.nextLine().trim();
+	} while (r[0].equals(""));
+	do {
+	    System.out.println("interpretes");
+	    r[1] = sc.nextLine().trim();
+	} while (r[1].equals(""));
+	return r;
+    }
+
     private String titre, interpretes;
 
     public Spectacle(String titre, String interpretes) {

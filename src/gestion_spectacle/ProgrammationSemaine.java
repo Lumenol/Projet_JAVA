@@ -1,11 +1,12 @@
 package gestion_spectacle;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class ProgrammationSemaine {
+public class ProgrammationSemaine implements Serializable {
     private Map<Spectacle, Programmation> programation;
 
     private int semaine;

@@ -1,10 +1,59 @@
 package gestion_spectacle;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Set;
 
-public class EnsembleSalle implements Iterable {
+public class EnsembleSalle implements Iterable, Serializable {
+    static public EnsembleSalle charger(String nomFichier) throws FileNotFoundException, IOException {
+	ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomFichier));
+	Object obj;
+	try {
+	    obj = ois.readObject();
+	    if (obj.getClass() != EnsembleSalle.class) {
+		obj = null;
+	    }
+	} catch (ClassNotFoundException e) {
+	    obj = null;
+	}
+	ois.close();
+	return (EnsembleSalle) obj;
+
+    }
+
+    public static Salle choisirSalle(EnsembleSalle ens) {
+
+	return null;
+    }
+
+    public static EnsembleSalle ensembleSalle() {
+	Scanner sc = new Scanner(System.in);
+	boolean loop = true;
+	String in;
+	EnsembleSalle salles = new EnsembleSalle();
+	while (loop) {
+	    System.out.println("q pour quitter any key for create new room");
+	    in = sc.nextLine();
+	    switch (in) {
+	    case "q":
+		loop = false;
+		break;
+	    default:
+		salles.ajouter(Salle.salle());
+		break;
+	    }
+	}
+	return salles;
+    }
+
     private Set<Salle> salles;
 
     public EnsembleSalle() {
@@ -53,6 +102,12 @@ public class EnsembleSalle implements Iterable {
 	    }
 	}
 	return null;
+    }
+
+    public void sauvegarder(String nomFichier) throws FileNotFoundException, IOException {
+	ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomFichier));
+	oos.writeObject(this);
+	oos.close();
     }
 
     @Override

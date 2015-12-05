@@ -1,10 +1,11 @@
 package gestion_spectacle;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-public abstract class Programmation<T extends Seance> implements Iterable<T> {
+public abstract class Programmation<T extends Seance> implements Iterable<T>, Serializable {
 
     private TreeSet<T> seances = new TreeSet<T>();
 

@@ -1,6 +1,38 @@
 package gestion_spectacle;
 
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 public class SalleTheatre extends Salle {
+
+    public static SalleTheatre salleTheatre() {
+	Scanner sc = new Scanner(System.in);
+	Salle salle = salle();
+	int nbFauteuils = -1;
+	StringTokenizer toka;
+	double prixFauteuil = -1;
+	do {
+	    System.out.println("nbFauteuils");
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    nbFauteuils = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (nbFauteuils < 0);
+	do {
+	    System.out.println("prixFauteuil");
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    prixFauteuil = Double.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (prixFauteuil < 0);
+	return new SalleTheatre(salle, nbFauteuils, prixFauteuil);
+    }
 
     private int nbFauteuils;
 

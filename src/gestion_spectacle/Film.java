@@ -1,6 +1,34 @@
 package gestion_spectacle;
 
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 public class Film extends Spectacle {
+    public static Film film() {
+	String[] spectacle = Spectacle.spectacle();
+	Scanner sc = new Scanner(System.in);
+	String realisateur;
+	int duree = 0;
+	StringTokenizer toka;
+	do {
+	    System.out.println("realisateur");
+	    realisateur = sc.nextLine().trim();
+	} while (realisateur.equals(""));
+
+	do {
+	    System.out.println("duree en min");
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    duree = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (duree <= 0);
+
+	return new Film(spectacle[0], spectacle[1], realisateur, new Heure(duree));
+    }
+
     private Heure duree;
 
     private String realisateur;

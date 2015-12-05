@@ -6,6 +6,12 @@ public class SeanceCinema extends Seance {
 
     private Salle salle;
 
+    // public static seanceCinema(){
+    // Object[] seance = Seance.seance();
+    // return new
+    // SeanceCinema(seance[0],seance[1],EnsembleSalle.choisirSalle());
+    // }
+
     public SeanceCinema(Heure horaire, int jour, Salle salle) {
 	super(horaire, jour);
 	this.salle = salle;

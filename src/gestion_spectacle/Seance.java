@@ -1,6 +1,51 @@
 package gestion_spectacle;
 
-public abstract class Seance implements Comparable<Seance> {
+import java.io.Serializable;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public abstract class Seance implements Comparable<Seance>, Serializable {
+    protected static Object[] seance() {
+	Scanner sc = new Scanner(System.in);
+	Object[] r = new Object[2];
+	int jour = 0, heure = -1, minute = -1;
+	StringTokenizer toka;
+	do {
+	    System.out.println("jour");
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    jour = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (jour <= 0 || jour > 7);
+	do {
+	    System.out.println("heure");
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    jour = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (heure < 0 || heure > 23);
+	do {
+	    System.out.println("minutes");
+	    toka = new StringTokenizer(sc.nextLine());
+	    if (toka.hasMoreTokens()) {
+		try {
+		    minute = Integer.valueOf(toka.nextToken());
+		} catch (NumberFormatException e) {
+		}
+	    }
+	} while (minute < 0 || minute > 59);
+
+	r[0] = new Heure(heure, minute);
+	r[1] = jour;
+	return r;
+    }
+
     private Heure horaire;
 
     private int jour, nbPlacesVenduesTN;
