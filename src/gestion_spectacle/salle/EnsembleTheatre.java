@@ -1,4 +1,4 @@
-package gestion_spectacle;
+package gestion_spectacle.salle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,14 +29,15 @@ public class EnsembleTheatre extends EnsembleSalle {
 	boolean loop = true;
 	String in;
 	EnsembleTheatre salles = new EnsembleTheatre();
+	System.out.println("Création ensemble theatre");
 	while (loop) {
-	    System.out.println("q pour quitter any key for create new room");
+	    System.out.println("(q)uitter (a)jouter");
 	    in = sc.nextLine();
 	    switch (in) {
 	    case "q":
 		loop = false;
 		break;
-	    default:
+	    case "a":
 		salles.ajouter(SalleTheatre.salleTheatre());
 		break;
 	    }

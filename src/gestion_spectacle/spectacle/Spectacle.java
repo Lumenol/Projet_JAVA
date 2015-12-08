@@ -1,4 +1,4 @@
-package gestion_spectacle;
+package gestion_spectacle.spectacle;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -6,8 +6,13 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import gestion_spectacle.exception.PasDeSpectacleException;
+
 public abstract class Spectacle implements Serializable {
-    public static Spectacle choisirSpectacle(Collection<? extends Spectacle> ens) {
+    public static Spectacle choisirSpectacle(Collection<? extends Spectacle> ens) throws PasDeSpectacleException {
+	if (ens == null || ens.isEmpty()) {
+	    throw new PasDeSpectacleException();
+	}
 	Scanner sc = new Scanner(System.in);
 	StringTokenizer toka;
 	int index = -1, i = 0;

@@ -1,4 +1,6 @@
-package gestion_spectacle;
+package gestion_spectacle.programmation;
+
+import gestion_spectacle.seance.SeanceTheatre;
 
 public class ProgrammationTheatre extends Programmation<SeanceTheatre> {
 

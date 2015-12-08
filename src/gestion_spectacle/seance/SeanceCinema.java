@@ -1,11 +1,16 @@
-package gestion_spectacle;
+package gestion_spectacle.seance;
 
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import gestion_spectacle.Heure;
+import gestion_spectacle.exception.PasDeSalleException;
+import gestion_spectacle.salle.EnsembleSalle;
+import gestion_spectacle.salle.Salle;
+
 public class SeanceCinema extends Seance {
 
-    public static SeanceCinema seanceCinema(EnsembleSalle ens) {
+    public static SeanceCinema seanceCinema(EnsembleSalle ens) throws PasDeSalleException {
 	Object[] seance = Seance.seance();
 	return new SeanceCinema((Heure) seance[0], (int) seance[1], ens.choisirSalle());
     }

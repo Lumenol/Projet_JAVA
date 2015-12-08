@@ -12,30 +12,39 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import gestion_spectacle.exception.DonneIntrouvableExecption;
+import gestion_spectacle.exception.PasDeSalleException;
+import gestion_spectacle.exception.PasDeSpectacleException;
+import gestion_spectacle.programmation.ProgrammationSemaine;
+import gestion_spectacle.salle.EnsembleSalle;
+import gestion_spectacle.salle.EnsembleTheatre;
+
 public class GestionSpectacle {
 
     public static Scanner sc = new Scanner(System.in);
 
     static public Serializable charger(String nomFichier, Class<Serializable> c)
-	    throws FileNotFoundException, IOException {
+	    throws FileNotFoundException, IOException, DonneIntrouvableExecption {
 	ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomFichier));
 	Object obj;
 	try {
 	    obj = ois.readObject();
 	    if (obj.getClass() != c) {
-		obj = null;
+		throw new DonneIntrouvableExecption();
 	    }
 	} catch (ClassNotFoundException e) {
-	    obj = null;
+	    throw new DonneIntrouvableExecption();
+	} finally {
+	    ois.close();
 	}
-	ois.close();
+
 	return (Serializable) obj;
     }
 
     public static void main(String[] args) {
 	List<ProgrammationSemaine> lesProgrammations = new ArrayList<ProgrammationSemaine>();
-	EnsembleSalle salles = null;
-	EnsembleTheatre sallesTheatre = null;
+	EnsembleSalle salles = new EnsembleSalle();
+	EnsembleTheatre sallesTheatre = new EnsembleTheatre();
 
 	salles = EnsembleSalle.ensembleSalle();
 	sallesTheatre = EnsembleTheatre.ensembleSalleTheatre();
@@ -69,7 +78,8 @@ public class GestionSpectacle {
 	boolean loop = true;
 
 	while (loop) {
-	    System.out.println("(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder");
+	    System.out.println(
+		    "(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder (d)ebug");
 	    StringTokenizer toka;
 	    int s = -1;
 	    switch (sc.nextLine()) {
@@ -77,8 +87,16 @@ public class GestionSpectacle {
 		loop = false;
 		break;
 	    case "a":
-		lesProgrammations.add(
-			ProgrammationSemaine.programmationSemaine(lesProgrammations.size(), salles, sallesTheatre));
+		if (lesProgrammations.size() < 52) {
+		    try {
+			lesProgrammations.add(ProgrammationSemaine.programmationSemaine(lesProgrammations.size(),
+				salles, sallesTheatre));
+		    } catch (PasDeSalleException e) {
+			System.out.println("Il n'y a pas de salle");
+		    }
+		} else {
+		    System.out.println("il y a deja 52 semaines de programmer");
+		}
 		break;
 
 	    case "m":
@@ -114,16 +132,20 @@ public class GestionSpectacle {
 			    }
 			}
 		    } while (s < 0 || s >= lesProgrammations.size());
-		    lesProgrammations.get(s).vendre();
+		    try {
+			lesProgrammations.get(s).vendre();
+		    } catch (PasDeSpectacleException e) {
+			System.out.println("Il n'y a pas de spectacle de programmer");
+		    }
 		} else {
 		    System.out.println("Il n'y a aucune programmation");
 		}
 		break;
 	    case "s":
 		try {
-		    salles.sauvegarder("salles");
-		    sallesTheatre.sauvegarder("salleTheatre");
-		    sauvegarder("prodSemaine", (Serializable) lesProgrammations);
+		    sauvegarder("salles.es", salles);
+		    sauvegarder("salleTheatre.et", sallesTheatre);
+		    sauvegarder("prodSemaine.ps", (Serializable) lesProgrammations);
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
@@ -131,15 +153,22 @@ public class GestionSpectacle {
 
 	    case "c":
 		try {
-		    salles = EnsembleSalle.charger("salles");
-		    sallesTheatre = EnsembleTheatre.charger("salleTheatre");
+		    salles = (EnsembleSalle) charger("salles.es", (Class<Serializable>) salles.getClass());
 
-		    lesProgrammations = (List<ProgrammationSemaine>) charger("prodSemaine",
+		    sallesTheatre = (EnsembleTheatre) charger("salleTheatre.et",
+			    (Class<Serializable>) sallesTheatre.getClass());
+
+		    lesProgrammations = (List<ProgrammationSemaine>) charger("prodSemaine.ps",
 			    (Class<Serializable>) lesProgrammations.getClass());
-		} catch (IOException e) {
+		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 		break;
+
+	    case "d":
+		System.out.println(lesProgrammations);
+		break;
+
 	    default:
 		break;
 	    }

@@ -1,4 +1,4 @@
-package gestion_spectacle;
+package gestion_spectacle.programmation;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
+
+import gestion_spectacle.exception.PasDeSeanceException;
+import gestion_spectacle.seance.Seance;
 
 public abstract class Programmation<T extends Seance> implements Iterable<T>, Serializable {
 
@@ -24,7 +27,10 @@ public abstract class Programmation<T extends Seance> implements Iterable<T>, Se
 
     }
 
-    public Seance choisirSeance() {
+    public Seance choisirSeance() throws PasDeSeanceException {
+	if (seances.isEmpty()) {
+	    throw new PasDeSeanceException();
+	}
 	Scanner sc = new Scanner(System.in);
 	StringTokenizer toka;
 	int index = -1, i = 0;
@@ -70,6 +76,10 @@ public abstract class Programmation<T extends Seance> implements Iterable<T>, Se
 	int result = 1;
 	result = prime * result + ((seances == null) ? 0 : seances.hashCode());
 	return result;
+    }
+
+    public boolean isEmpty() {
+	return seances.isEmpty();
     }
 
     @Override

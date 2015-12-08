@@ -1,11 +1,5 @@
-package gestion_spectacle;
+package gestion_spectacle.salle;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -13,35 +7,40 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import gestion_spectacle.exception.PasDeSalleException;
+
 public class EnsembleSalle implements Iterable, Serializable {
-    static public EnsembleSalle charger(String nomFichier) throws FileNotFoundException, IOException {
-	ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomFichier));
-	Object obj;
-	try {
-	    obj = ois.readObject();
-	    if (obj.getClass() != EnsembleSalle.class) {
-		obj = null;
-	    }
-	} catch (ClassNotFoundException e) {
-	    obj = null;
-	}
-	ois.close();
-	return (EnsembleSalle) obj;
-    }
+    // static public EnsembleSalle charger(String nomFichier) throws
+    // FileNotFoundException, IOException {
+    // ObjectInputStream ois = new ObjectInputStream(new
+    // FileInputStream(nomFichier));
+    // Object obj;
+    // try {
+    // obj = ois.readObject();
+    // if (obj.getClass() != EnsembleSalle.class) {
+    // obj = null;
+    // }
+    // } catch (ClassNotFoundException e) {
+    // obj = null;
+    // }
+    // ois.close();
+    // return (EnsembleSalle) obj;
+    // }
 
     public static EnsembleSalle ensembleSalle() {
 	Scanner sc = new Scanner(System.in);
 	boolean loop = true;
 	String in;
 	EnsembleSalle salles = new EnsembleSalle();
+	System.out.println("Création ensemble salle");
 	while (loop) {
-	    System.out.println("q pour quitter any key for create new room");
+	    System.out.println("(q)uitter (a)jouter");
 	    in = sc.nextLine();
 	    switch (in) {
 	    case "q":
 		loop = false;
 		break;
-	    default:
+	    case "a":
 		salles.ajouter(Salle.salle());
 		break;
 	    }
@@ -59,7 +58,10 @@ public class EnsembleSalle implements Iterable, Serializable {
 	salles.add(salle);
     }
 
-    public Salle choisirSalle() {
+    public Salle choisirSalle() throws PasDeSalleException {
+	if (salles == null || salles.isEmpty()) {
+	    throw new PasDeSalleException();
+	}
 	Scanner sc = new Scanner(System.in);
 	StringTokenizer toka;
 	int index = -1, i = 0;
@@ -109,6 +111,10 @@ public class EnsembleSalle implements Iterable, Serializable {
 	return result;
     }
 
+    public boolean isEmpty() {
+	return salles.isEmpty();
+    }
+
     public Iterator<Salle> iterator() {
 	return salles.iterator();
     }
@@ -124,11 +130,17 @@ public class EnsembleSalle implements Iterable, Serializable {
 	return null;
     }
 
-    public void sauvegarder(String nomFichier) throws FileNotFoundException, IOException {
-	ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomFichier));
-	oos.writeObject(this);
-	oos.close();
-    }
+    // public void sauvegarder(String nomFichier) throws FileNotFoundException,
+    // IOException {
+    // ObjectOutputStream oos = new ObjectOutputStream(new
+    // FileOutputStream(nomFichier));
+    // oos.writeObject(this);
+    // oos.close();
+    // }
+    //
+    // public int size() {
+    // return salles.size();
+    // }
 
     @Override
     public String toString() {

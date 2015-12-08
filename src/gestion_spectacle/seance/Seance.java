@@ -1,8 +1,11 @@
-package gestion_spectacle;
+package gestion_spectacle.seance;
 
 import java.io.Serializable;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
+import gestion_spectacle.Heure;
+import gestion_spectacle.salle.EnsembleSalle;
 
 public abstract class Seance implements Comparable<Seance>, Serializable {
     protected static Object[] seance() {

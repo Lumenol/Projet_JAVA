@@ -1,7 +1,10 @@
-package gestion_spectacle;
+package gestion_spectacle.programmation;
 
 import java.util.Iterator;
 import java.util.TreeSet;
+
+import gestion_spectacle.Heure;
+import gestion_spectacle.seance.SeanceCinema;
 
 public class ProgrammationFilm extends Programmation<SeanceCinema> {
 

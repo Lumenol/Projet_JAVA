@@ -1,4 +1,4 @@
-package gestion_spectacle;
+package gestion_spectacle.salle;
 
 import java.util.Scanner;
 import java.util.StringTokenizer;

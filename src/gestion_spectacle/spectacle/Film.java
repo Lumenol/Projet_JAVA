@@ -1,7 +1,9 @@
-package gestion_spectacle;
+package gestion_spectacle.spectacle;
 
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
+import gestion_spectacle.Heure;
 
 public class Film extends Spectacle {
     public static Film film() {
