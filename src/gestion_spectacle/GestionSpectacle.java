@@ -30,10 +30,10 @@ public class GestionSpectacle {
 	try {
 	    obj = ois.readObject();
 	    if (obj.getClass() != c) {
-		throw new DonneIntrouvableExecption();
+		throw new DonneIntrouvableExecption("Le fichier ne contient pas les données recherche");
 	    }
 	} catch (ClassNotFoundException e) {
-	    throw new DonneIntrouvableExecption();
+	    throw new DonneIntrouvableExecption("Le fichier ne contient pas les données recherche");
 	} finally {
 	    ois.close();
 	}
@@ -49,33 +49,7 @@ public class GestionSpectacle {
 	salles = EnsembleSalle.ensembleSalle();
 	sallesTheatre = EnsembleTheatre.ensembleSalleTheatre();
 
-	// try {
-	// salles = EnsembleSalle.charger("salles"); //
-	// sallesTheatre = EnsembleTheatre.charger("salleTheatre");
-	//
-	// lesProgrammations = (List<ProgrammationSemaine>)
-	// charger("progSemaine",
-	// (Class<Serializable>) lesProgrammations.getClass());
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-
-	// System.out.println(salles);
-	// System.out.println(sallesTheatre);
-
-	// System.out.println(lesProgrammations);
-
-	// System.out.println(salles.choisirSalle());
-
-	// try {
-	// ProgrammationSemaine.programmationSemaine(0, salles,
-	// sallesTheatre).sauvegarder("progSemaine");
-	// } catch (IllegalArgumentException | IOException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-
-	boolean loop = true;
+	boolean loop = true, loop2;
 
 	while (loop) {
 	    System.out.println(
@@ -142,26 +116,91 @@ public class GestionSpectacle {
 		}
 		break;
 	    case "s":
-		try {
-		    sauvegarder("salles.es", salles);
-		    sauvegarder("salleTheatre.et", sallesTheatre);
-		    sauvegarder("prodSemaine.ps", (Serializable) lesProgrammations);
-		} catch (IOException e) {
-		    e.printStackTrace();
+		loop2 = true;
+		while (loop2) {
+		    System.out.println("(r)etour (s)alles (t)heatre (p)rogammation");
+		    switch (sc.nextLine()) {
+		    case "r":
+			loop2 = false;
+			break;
+
+		    case "s":
+			System.out.println("Entre nom fichier");
+			try {
+			    sauvegarder(sc.nextLine(), salles);
+			    System.out.println("Fichier sauvegarder");
+			} catch (Exception e) {
+			    System.out.println("Erreur " + e.getMessage());
+			}
+			break;
+
+		    case "t":
+			System.out.println("Entre nom fichier");
+			try {
+			    sauvegarder(sc.nextLine(), sallesTheatre);
+			    System.out.println("Fichier sauvegarder");
+			} catch (Exception e) {
+			    System.out.println("Erreur " + e.getMessage());
+			}
+
+			break;
+
+		    case "p":
+			System.out.println("Entre nom fichier");
+			try {
+			    sauvegarder(sc.nextLine(), (Serializable) lesProgrammations);
+			    System.out.println("Fichier sauvegarder");
+			} catch (Exception e) {
+			    System.out.println("Erreur " + e.getMessage());
+			}
+			break;
+		    }
 		}
 		break;
 
 	    case "c":
-		try {
-		    salles = (EnsembleSalle) charger("salles.es", (Class<Serializable>) salles.getClass());
 
-		    sallesTheatre = (EnsembleTheatre) charger("salleTheatre.et",
-			    (Class<Serializable>) sallesTheatre.getClass());
+		loop2 = true;
+		while (loop2) {
+		    System.out.println("(r)etour (s)alles (t)heatre (p)rogammation");
+		    switch (sc.nextLine()) {
+		    case "r":
+			loop2 = false;
+			break;
 
-		    lesProgrammations = (List<ProgrammationSemaine>) charger("prodSemaine.ps",
-			    (Class<Serializable>) lesProgrammations.getClass());
-		} catch (Exception e) {
-		    e.printStackTrace();
+		    case "s":
+			System.out.println("Entre nom fichier");
+			try {
+			    salles = (EnsembleSalle) charger(sc.nextLine(), (Class<Serializable>) salles.getClass());
+			    System.out.println("Fichier chargé");
+			} catch (Exception e) {
+			    System.out.println("Erreur " + e.getMessage());
+			}
+			break;
+
+		    case "t":
+			System.out.println("Entre nom fichier");
+			try {
+			    sallesTheatre = (EnsembleTheatre) charger(sc.nextLine(),
+				    (Class<Serializable>) sallesTheatre.getClass());
+			    System.out.println("Fichier chargé");
+			} catch (Exception e) {
+			    System.out.println("Erreur " + e.getMessage());
+			}
+
+			break;
+
+		    case "p":
+			System.out.println("Entre nom fichier");
+			try {
+			    lesProgrammations = (List<ProgrammationSemaine>) charger(sc.nextLine(),
+				    (Class<Serializable>) lesProgrammations.getClass());
+			    System.out.println("Fichier chargé");
+			} catch (Exception e) {
+			    System.out.println("Erreur " + e.getMessage());
+			}
+			break;
+		    }
 		}
 		break;
 
