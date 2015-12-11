@@ -46,6 +46,7 @@ public class EnsembleTheatre extends EnsembleSalle {
     }
 
     public EnsembleTheatre() {
+	super();
     }
 
     @Override

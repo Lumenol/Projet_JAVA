@@ -18,6 +18,8 @@ import gestion_spectacle.exception.PasDeSpectacleException;
 import gestion_spectacle.programmation.ProgrammationSemaine;
 import gestion_spectacle.salle.EnsembleSalle;
 import gestion_spectacle.salle.EnsembleTheatre;
+import gestion_spectacle.salle.Salle;
+import gestion_spectacle.salle.SalleTheatre;
 
 public class GestionSpectacle {
 
@@ -46,20 +48,42 @@ public class GestionSpectacle {
 	EnsembleSalle salles = new EnsembleSalle();
 	EnsembleTheatre sallesTheatre = new EnsembleTheatre();
 
-	salles = EnsembleSalle.ensembleSalle();
-	sallesTheatre = EnsembleTheatre.ensembleSalleTheatre();
+	// salles = EnsembleSalle.ensembleSalle();
+	// sallesTheatre = EnsembleTheatre.ensembleSalleTheatre();
 
 	boolean loop = true, loop2;
 
 	while (loop) {
 	    System.out.println(
-		    "(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder (d)ebug");
+		    "(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder (d)ebug (salle)");
 	    StringTokenizer toka;
 	    int s = -1;
 	    switch (sc.nextLine()) {
 	    case "q":
 		loop = false;
 		break;
+
+	    case "salle":
+		loop2 = true;
+		while (loop2) {
+		    System.out.println("(r)etour (s)tandard (t)heatre");
+		    switch (sc.nextLine()) {
+		    case "r":
+			loop2 = false;
+			break;
+
+		    case "s":
+			salles.add(Salle.salle());
+			break;
+
+		    case "t":
+			sallesTheatre.add(SalleTheatre.salleTheatre());
+			break;
+
+		    }
+		}
+		break;
+
 	    case "a":
 		if (lesProgrammations.size() < 52) {
 		    try {
@@ -205,6 +229,8 @@ public class GestionSpectacle {
 		break;
 
 	    case "d":
+		System.out.println(salles);
+		System.out.println(sallesTheatre);
 		System.out.println(lesProgrammations);
 		break;
 
