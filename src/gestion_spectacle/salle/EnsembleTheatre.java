@@ -29,9 +29,9 @@ public class EnsembleTheatre extends EnsembleSalle {
 	boolean loop = true;
 	String in;
 	EnsembleTheatre salles = new EnsembleTheatre();
-	System.out.println("Création ensemble theatre");
+	System.out.println("Enregistrer une nouvelle salle de théatre");
 	while (loop) {
-	    System.out.println("(q)uitter (a)jouter");
+	    System.out.println(" q(uitter) \n a(jouter)");
 	    in = sc.nextLine();
 	    switch (in) {
 	    case "q":

@@ -79,8 +79,8 @@ public class SeanceTheatre extends Seance {
 	    switch (sc.nextLine()) {
 	    case "n":
 		do {
-		    System.out.println("Place disponible : " + nbPlaceStandardDispo());
-		    System.out.println("Combient voulez-vous en vendre ?");
+		    System.out.println("Places disponibles : " + nbPlaceStandardDispo());
+		    System.out.println("Combien voulez-vous en vendre ?");
 		    toka = new StringTokenizer(sc.nextLine());
 		    if (toka.hasMoreTokens()) {
 			try {
@@ -95,7 +95,7 @@ public class SeanceTheatre extends Seance {
 	    case "t":
 		do {
 		    System.out.println("Fauteuils disponible : " + nbFauteuilsDispo());
-		    System.out.println("Combient voulez-vous en vendre ?");
+		    System.out.println("Combien voulez-vous en vendre ?");
 		    toka = new StringTokenizer(sc.nextLine());
 		    if (toka.hasMoreTokens()) {
 			try {
@@ -117,7 +117,7 @@ public class SeanceTheatre extends Seance {
 
     public void vendrePlacesFauteuil(int nbre) throws IllegalArgumentException {
 	if (nbFauteuilsDispo() < nbre) {
-	    throw new IllegalArgumentException("Nombre de fauteuil insuffisant");
+	    throw new IllegalArgumentException("Nombre de fauteuils insuffisant");
 	}
 	nbFauteuilsVendus += nbre;
     }
@@ -125,7 +125,7 @@ public class SeanceTheatre extends Seance {
     @Override
     public void vendrePlacesTN(int nbre) throws IllegalArgumentException {
 	if (nbPlacesDispo() < nbre) {
-	    throw new IllegalArgumentException("Nombre de place insuffisant");
+	    throw new IllegalArgumentException("Nombre de places insuffisant");
 	}
 	super.vendrePlacesTN(nbre);
     }

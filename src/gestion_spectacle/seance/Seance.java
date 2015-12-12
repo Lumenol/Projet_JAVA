@@ -14,7 +14,7 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
 	int jour = 0, heure = -1, minute = -1;
 	StringTokenizer toka;
 	do {
-	    System.out.println("jour");
+	    System.out.println("jour (1-7):");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {
@@ -24,7 +24,7 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
 	    }
 	} while (jour <= 0 || jour > 7);
 	do {
-	    System.out.println("heure");
+	    System.out.println("heure :");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {
@@ -34,7 +34,7 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
 	    }
 	} while (heure < 0 || heure > 23);
 	do {
-	    System.out.println("minutes");
+	    System.out.println("minutes :");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {

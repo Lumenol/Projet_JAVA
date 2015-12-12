@@ -39,11 +39,11 @@ public abstract class Spectacle implements Serializable {
 	Scanner sc = new Scanner(System.in);
 	String[] r = new String[2];
 	do {
-	    System.out.println("titre");
+	    System.out.println("titre :");
 	    r[0] = sc.nextLine().trim();
 	} while (r[0].equals(""));
 	do {
-	    System.out.println("interpretes");
+	    System.out.println("interprètes :");
 	    r[1] = sc.nextLine().trim();
 	} while (r[1].equals(""));
 	return r;

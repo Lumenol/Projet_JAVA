@@ -13,12 +13,12 @@ public class Film extends Spectacle {
 	int duree = 0;
 	StringTokenizer toka;
 	do {
-	    System.out.println("realisateur");
+	    System.out.println("realisateur :");
 	    realisateur = sc.nextLine().trim();
 	} while (realisateur.equals(""));
 
 	do {
-	    System.out.println("duree en min");
+	    System.out.println("durée en minutes :");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {

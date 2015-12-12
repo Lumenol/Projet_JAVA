@@ -12,7 +12,7 @@ public class SalleTheatre extends Salle {
 	StringTokenizer toka;
 	double prixFauteuil = -1;
 	do {
-	    System.out.println("nbFauteuils");
+	    System.out.println("Nombre de fauteuils de la salle :");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {
@@ -22,7 +22,7 @@ public class SalleTheatre extends Salle {
 	    }
 	} while (nbFauteuils < 0);
 	do {
-	    System.out.println("prixFauteuil");
+	    System.out.println("Prix du fauteuil :");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {
