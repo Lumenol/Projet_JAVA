@@ -44,8 +44,8 @@ public class ProgrammationSemaine implements Serializable {
 
     public static ProgrammationSemaine programmationSemaine(int semaine, EnsembleSalle salles, EnsembleTheatre theatre)
 	    throws PasDeSalleException {
-	if (salles == null || salles.isEmpty() || theatre == null || theatre.isEmpty()) {
-	    throw new PasDeSalleException();
+	if ((salles == null || salles.isEmpty()) && (theatre == null || theatre.isEmpty())) {
+	    throw new PasDeSalleException("Il n'y a pas de salle de spectacle");
 	}
 	ProgrammationSemaine programmation = new ProgrammationSemaine(semaine);
 	boolean loop = true;
@@ -93,7 +93,9 @@ public class ProgrammationSemaine implements Serializable {
     }
 
     public void ajouterFilm(EnsembleSalle salles) throws PasDeSalleException {
-
+	if (salles.isEmpty()) {
+	    throw new PasDeSalleException();
+	}
 	Film f = Film.film();
 	ajouterSeance(f, SeanceCinema.seanceCinema(salles));
 	boolean loop2 = true;
@@ -114,6 +116,9 @@ public class ProgrammationSemaine implements Serializable {
     }
 
     public void ajouterPiece(EnsembleTheatre salles) throws PasDeSalleException {
+	if (salles.isEmpty()) {
+	    throw new PasDeSalleException();
+	}
 	PieceTheatre p = PieceTheatre.pieceTheatre();
 	ajouterSeance(p, SeanceTheatre.seanceTheatre(salles));
 	Scanner sc = new Scanner(System.in);
@@ -159,6 +164,81 @@ public class ProgrammationSemaine implements Serializable {
     public ProgrammationTheatre chercherPiece(String titre) {
 
 	return (ProgrammationTheatre) chercher(titre, pieces());
+    }
+
+    public void consultation() throws PasDeSpectacleException {
+	if (films().isEmpty() && pieces().isEmpty()) {
+	    throw new PasDeSpectacleException("Il n'y a pas de spectacle dans cette programmation");
+	}
+	boolean loop = true, loop2, loop3;
+	Scanner sc = new Scanner(System.in);
+	do {
+	    System.out.println("f-film p-pièce (r)etour");
+	    switch (sc.nextLine()) {
+	    case "f":
+		try {
+		    Film f = (Film) Spectacle.choisirSpectacle(this.films());
+		    loop3 = true;
+		    while (loop3) {
+			System.out.println("(r)etour (c)hoisir seance");
+			switch (sc.nextLine()) {
+			case "r":
+			    loop3 = false;
+			    break;
+
+			case "c":
+			    try {
+				SeanceCinema s = (SeanceCinema) programation(f).choisirSeance();
+				System.out.println("Chiffre affaire : " + s.chiffreAffaire());
+				System.out.println("Taux de remplissage : " + s.tauxRemplissage());
+
+			    } catch (PasDeSeanceException e) {
+				System.out.println("il n'y a pas de seance pour ce film");
+			    }
+			    break;
+			}
+
+		    }
+		} catch (PasDeSpectacleException e) {
+		    System.out.println("Il n'y a pas de film");
+		}
+		break;
+
+	    case "p":
+		try {
+		    PieceTheatre p = (PieceTheatre) Spectacle.choisirSpectacle(this.pieces());
+		    loop3 = true;
+		    while (loop3) {
+			System.out.println("(r)etour (c)hoisir seance");
+			switch (sc.nextLine()) {
+			case "r":
+			    loop2 = false;
+			    break;
+
+			case "c":
+			    try {
+				SeanceCinema s = (SeanceCinema) programation(p).choisirSeance();
+				System.out.println("Chiffre affaire : " + s.chiffreAffaire());
+				System.out.println("Taux de remplissage : " + s.tauxRemplissage());
+
+			    } catch (PasDeSeanceException e) {
+				System.out.println("il n'y a pas de seance pour ce film");
+			    }
+			    break;
+			}
+
+		    }
+		} catch (PasDeSpectacleException e) {
+		    System.out.println("il n'y a pas de piece");
+		}
+		break;
+	    case "r":
+		loop = false;
+		break;
+	    }
+
+	} while (loop);
+
     }
 
     @Override

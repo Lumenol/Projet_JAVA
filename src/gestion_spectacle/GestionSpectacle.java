@@ -55,12 +55,36 @@ public class GestionSpectacle {
 
 	while (loop) {
 	    System.out.println(
-		    "(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder (d)ebug (salle)");
+		    "(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder (d)ebug (salle) (co)nsultation");
 	    StringTokenizer toka;
 	    int s = -1;
 	    switch (sc.nextLine()) {
 	    case "q":
 		loop = false;
+		break;
+
+	    case "co":
+		if (!lesProgrammations.isEmpty()) {
+		    do {
+			System.out.println("Il y a " + lesProgrammations.size()
+				+ " semaines enregistre la quelle voulez-vous consulter ?");
+			toka = new StringTokenizer(sc.nextLine());
+			if (toka.hasMoreTokens()) {
+			    try {
+				s = Integer.valueOf(toka.nextToken());
+			    } catch (NumberFormatException e) {
+			    }
+			}
+		    } while (s < 0 || s >= lesProgrammations.size());
+		    try {
+			lesProgrammations.get(s).consultation();
+		    } catch (PasDeSpectacleException e) {
+			System.out.println("Erreur " + e.getMessage());
+		    }
+		} else {
+		    System.out.println("Il n'y a aucune programmation");
+		}
+
 		break;
 
 	    case "salle":
@@ -90,7 +114,7 @@ public class GestionSpectacle {
 			lesProgrammations.add(ProgrammationSemaine.programmationSemaine(lesProgrammations.size(),
 				salles, sallesTheatre));
 		    } catch (PasDeSalleException e) {
-			System.out.println("Il n'y a pas de salle");
+			System.out.println(e.getMessage());
 		    }
 		} else {
 		    System.out.println("il y a deja 52 semaines de programmer");
