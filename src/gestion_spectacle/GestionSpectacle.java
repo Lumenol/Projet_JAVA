@@ -123,7 +123,7 @@ public class GestionSpectacle {
 		if (!lesProgrammations.isEmpty()) {
 		    do {
 			System.out.println("Il y a " + lesProgrammations.size()
-				+ " semaines enregistrées, pour laquelle voulez-vous vendre des places (entrer le numero de la semaine) ?");
+				+ " semaine(s) enregistrée(s), pour laquelle voulez-vous vendre des places (entrer le numero de la semaine) ?");
 			toka = new StringTokenizer(sc.nextLine());
 			if (toka.hasMoreTokens()) {
 			    try {
