@@ -54,6 +54,10 @@ public class EnsembleSalle implements Iterable, Serializable {
 	salles = new HashSet<Salle>();
     }
 
+    public boolean add(Salle e) {
+	return salles.add(e);
+    }
+
     public void ajouter(Salle salle) {
 	salles.add(salle);
     }
