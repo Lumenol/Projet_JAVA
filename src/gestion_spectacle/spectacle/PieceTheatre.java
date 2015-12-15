@@ -11,13 +11,13 @@ public class PieceTheatre extends Spectacle {
 	int nbEntractes = -1;
 	StringTokenizer toka;
 	do {
-	    System.out.println("metteur en scène :");
+	    System.out.println("metteurEnScene");
 	    if (sc.hasNextLine())
 		metteurEnScene = sc.nextLine().trim();
 
 	} while (metteurEnScene.equals(""));
 	do {
-	    System.out.println("nombre d'entractes :");
+	    System.out.println("nbEntractes");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {

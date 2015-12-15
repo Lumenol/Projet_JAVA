@@ -32,9 +32,9 @@ public class EnsembleSalle implements Iterable, Serializable {
 	boolean loop = true;
 	String in;
 	EnsembleSalle salles = new EnsembleSalle();
-	System.out.println("Enregistrer une nouvelle salle");
+	System.out.println("Création ensemble salle");
 	while (loop) {
-	    System.out.println(" a(jouter) \n q(uitter)");
+	    System.out.println("(q)uitter (a)jouter");
 	    in = sc.nextLine();
 	    switch (in) {
 	    case "q":

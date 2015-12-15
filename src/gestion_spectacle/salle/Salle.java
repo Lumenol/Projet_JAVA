@@ -12,11 +12,11 @@ public class Salle implements Serializable {
 	int nbPlacesStandard = 0;
 	double tarif = -1;
 	do {
-	    System.out.println("Nom de la salle :");
+	    System.out.println("Nom de la salle");
 	    nomSalle = sc.nextLine().trim();
 	} while (nomSalle.equals(""));
 	do {
-	    System.out.println("Nombre de places standard de la salle :");
+	    System.out.println("nbPlacesStandard");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {
@@ -26,7 +26,7 @@ public class Salle implements Serializable {
 	    }
 	} while (nbPlacesStandard <= 0);
 	do {
-	    System.out.println("Prix de la place :");
+	    System.out.println("tarif");
 	    toka = new StringTokenizer(sc.nextLine());
 	    if (toka.hasMoreTokens()) {
 		try {

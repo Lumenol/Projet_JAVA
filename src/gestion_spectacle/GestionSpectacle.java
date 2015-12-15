@@ -79,7 +79,7 @@ public class GestionSpectacle {
 
 	while (loop) {
 	    System.out.println(
-		    " q(uitter) \n a(jouter programmation semaine) \n m(odifier) \n v(endre) \n c(harger) \n s(auvegarder) \n d(ebug)");
+		    "(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder (d)ebug");
 	    StringTokenizer toka;
 	    int s = -1;
 	    switch (sc.nextLine()) {
@@ -92,10 +92,10 @@ public class GestionSpectacle {
 			lesProgrammations.add(ProgrammationSemaine.programmationSemaine(lesProgrammations.size(),
 				salles, sallesTheatre));
 		    } catch (PasDeSalleException e) {
-			System.out.println("Aucune salle n'est enregistrée");
+			System.out.println("Il n'y a pas de salle");
 		    }
 		} else {
-		    System.out.println("Il y a deja 52 semaines de programmées");
+		    System.out.println("il y a deja 52 semaines de programmer");
 		}
 		break;
 
@@ -103,7 +103,7 @@ public class GestionSpectacle {
 		if (!lesProgrammations.isEmpty()) {
 		    do {
 			System.out.println("Il y a " + lesProgrammations.size()
-				+ " semaines enregistrées, laquelle voulez-vous modifier (entrer le numero de la semaine) ?");
+				+ " semaines enregistre la quelle voulez-vous modifier ?");
 			toka = new StringTokenizer(sc.nextLine());
 			if (toka.hasMoreTokens()) {
 			    try {
@@ -114,7 +114,7 @@ public class GestionSpectacle {
 		    } while (s < 0 || s >= lesProgrammations.size());
 		    lesProgrammations.get(s).modification(salles, sallesTheatre);
 		} else {
-		    System.out.println("Aucune programmation n'est enregistrée");
+		    System.out.println("Il n'y a aucune programmation");
 		}
 
 		break;
@@ -123,7 +123,7 @@ public class GestionSpectacle {
 		if (!lesProgrammations.isEmpty()) {
 		    do {
 			System.out.println("Il y a " + lesProgrammations.size()
-				+ " semaine(s) enregistrée(s), pour laquelle voulez-vous vendre des places (entrer le numero de la semaine) ?");
+				+ " semaines enregistre pour la quelle voulez-vous vendre des places ?");
 			toka = new StringTokenizer(sc.nextLine());
 			if (toka.hasMoreTokens()) {
 			    try {
@@ -135,7 +135,7 @@ public class GestionSpectacle {
 		    try {
 			lesProgrammations.get(s).vendre();
 		    } catch (PasDeSpectacleException e) {
-			System.out.println("Aucun spectacle n'est programmé");
+			System.out.println("Il n'y a pas de spectacle de programmer");
 		    }
 		} else {
 		    System.out.println("Il n'y a aucune programmation");

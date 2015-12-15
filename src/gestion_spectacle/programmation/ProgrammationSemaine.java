@@ -51,7 +51,7 @@ public class ProgrammationSemaine implements Serializable {
 	boolean loop = true;
 	Scanner sc = new Scanner(System.in);
 	do {
-	    System.out.println(" f(ilm) \n p(ièce) \n r(etour)");
+	    System.out.println("f-film p-pièce (r)etour");
 	    switch (sc.nextLine()) {
 	    case "f":
 		try {
@@ -65,7 +65,7 @@ public class ProgrammationSemaine implements Serializable {
 		try {
 		    programmation.ajouterPiece(theatre);
 		} catch (PasDeSalleException e) {
-		    System.out.println("Il n'y a pas de salle de théatre");
+		    System.out.println("Il n'y a pas de salle de theatre");
 		}
 		break;
 
@@ -85,7 +85,7 @@ public class ProgrammationSemaine implements Serializable {
 
     public ProgrammationSemaine(int semaine) throws IllegalArgumentException {
 	if (semaine < 0 || semaine >= 52) {
-	    throw new IllegalArgumentException("Numero de semaine incorrecte");
+	    throw new IllegalArgumentException("numero de semaine incorrecte");
 	}
 	this.semaine = semaine;
 	programation = new HashMap<Spectacle, Programmation>();
@@ -99,7 +99,7 @@ public class ProgrammationSemaine implements Serializable {
 	boolean loop2 = true;
 	Scanner sc = new Scanner(System.in);
 	while (loop2) {
-	    System.out.println(" r(etour) \n a(jouter) ");
+	    System.out.println("(r)etour (a)jouter ");
 	    switch (sc.nextLine()) {
 	    case "r":
 		loop2 = false;
@@ -119,7 +119,7 @@ public class ProgrammationSemaine implements Serializable {
 	Scanner sc = new Scanner(System.in);
 	boolean loop2 = true;
 	while (loop2) {
-	    System.out.println(" r(etour) \n a(jouter) ");
+	    System.out.println("(r)etour (a)jouter ");
 	    switch (sc.nextLine()) {
 	    case "r":
 		loop2 = false;
@@ -203,12 +203,12 @@ public class ProgrammationSemaine implements Serializable {
 	boolean loop = true, loop2, loop3;
 	Scanner sc = new Scanner(System.in);
 	do {
-	    System.out.println(" f(ilm)\n p(ièce) \n r(etour)");
+	    System.out.println("f-film p-pièce (r)etour");
 	    switch (sc.nextLine()) {
 	    case "f":
 		loop3 = true;
 		while (loop3) {
-		    System.out.println("m(odifier existant) \n a(jouter Film) \n r(etour)");
+		    System.out.println("(m)odifier exiantant (a)jouter Film (r)etour");
 		    switch (sc.nextLine()) {
 
 		    case "r":
@@ -218,7 +218,7 @@ public class ProgrammationSemaine implements Serializable {
 			try {
 			    ajouterFilm(salles);
 			} catch (PasDeSalleException e1) {
-			    System.out.println("Il n'y a pas de salle de cinéma");
+			    System.out.println("il n'y a pas de salle de cinema");
 			}
 			break;
 
@@ -227,7 +227,7 @@ public class ProgrammationSemaine implements Serializable {
 			    Film f = (Film) Spectacle.choisirSpectacle(this.films());
 			    loop2 = true;
 			    while (loop2) {
-				System.out.println(" r(etour) \n a(jouter) \n s(upprimer)");
+				System.out.println("(r)etour (a)jouter (s)upprimer");
 				switch (sc.nextLine()) {
 				case "r":
 				    loop2 = false;
@@ -237,7 +237,7 @@ public class ProgrammationSemaine implements Serializable {
 				    try {
 					ajouterSeance(f, SeanceCinema.seanceCinema(salles));
 				    } catch (PasDeSalleException e) {
-					System.out.println("Il n'y a pas de salle de cinéma");
+					System.out.println("il n'y a pas de salle de cinema");
 				    }
 				    break;
 
@@ -245,13 +245,13 @@ public class ProgrammationSemaine implements Serializable {
 				    try {
 					supprimerSeance(f, programation(f).choisirSeance());
 				    } catch (PasDeSeanceException e) {
-					System.out.println("Il n'y a pas de scéance pour ce film");
+					System.out.println("Il n'y a pas de sceance pour ce film");
 				    }
 				    break;
 				}
 			    }
 			} catch (PasDeSpectacleException e) {
-			    System.out.println("Il n'y a pas de film");
+			    System.out.println("il n'y a pas de film");
 			}
 			break;
 		    }
@@ -262,7 +262,7 @@ public class ProgrammationSemaine implements Serializable {
 	    case "p":
 		loop3 = true;
 		while (loop3) {
-		    System.out.println("m(odifier existant) \n a(jouter Piece) \n r(etour)");
+		    System.out.println("(m)odifier exiantant (a)jouter Piece (r)etour");
 		    switch (sc.nextLine()) {
 
 		    case "r":
@@ -272,7 +272,7 @@ public class ProgrammationSemaine implements Serializable {
 			try {
 			    ajouterPiece(theatre);
 			} catch (PasDeSalleException e1) {
-			    System.out.println("Il n'y a pas de salle de cinéma");
+			    System.out.println("il n'y a pas de salle de cinema");
 			}
 			break;
 
@@ -281,7 +281,7 @@ public class ProgrammationSemaine implements Serializable {
 			    PieceTheatre p = (PieceTheatre) Spectacle.choisirSpectacle(this.pieces());
 			    loop2 = true;
 			    while (loop2) {
-				System.out.println(" r(etour) \n a(jouter) \n s(upprimer)");
+				System.out.println("(r)etour (a)jouter (s)upprimer");
 				switch (sc.nextLine()) {
 				case "r":
 				    loop2 = false;
@@ -292,7 +292,7 @@ public class ProgrammationSemaine implements Serializable {
 				    try {
 					ajouterSeance(p, SeanceTheatre.seanceTheatre(theatre));
 				    } catch (PasDeSalleException e) {
-					System.out.println("Il n'y a pas de salle de théatre");
+					System.out.println("il n'y a pas de salle de theatre");
 				    }
 
 				    break;
@@ -301,13 +301,13 @@ public class ProgrammationSemaine implements Serializable {
 				    try {
 					supprimerSeance(p, programation(p).choisirSeance());
 				    } catch (PasDeSeanceException e) {
-					System.out.println("Il n'y a pas de séance pour cette pièce");
+					System.out.println("il n'y a pas de seance pour cette piece");
 				    }
 				    break;
 				}
 			    }
 			} catch (PasDeSpectacleException e) {
-			    System.out.println("Il n'y a pas de pièce");
+			    System.out.println("il n'y a pas de piece");
 			}
 			break;
 		    }
@@ -368,14 +368,14 @@ public class ProgrammationSemaine implements Serializable {
 	boolean loop = true, loop2, loop3;
 	Scanner sc = new Scanner(System.in);
 	do {
-	    System.out.println(" f(ilm) \n p(ièce) \n r(etour)");
+	    System.out.println("f-film p-pièce (r)etour");
 	    switch (sc.nextLine()) {
 	    case "f":
 		try {
 		    Film f = (Film) Spectacle.choisirSpectacle(this.films());
 		    loop3 = true;
 		    while (loop3) {
-			System.out.println(" r(etour) \n c(hoisir séance)");
+			System.out.println("(r)etour (c)hoisir seance");
 			switch (sc.nextLine()) {
 			case "r":
 			    loop3 = false;
@@ -386,8 +386,8 @@ public class ProgrammationSemaine implements Serializable {
 				SeanceCinema s = (SeanceCinema) programation(f).choisirSeance();
 				loop2 = true;
 				while (loop2) {
-				    System.out.println(" r(etour) \n v(endre)");
-				    System.out.println("Places Libres : " + s.nbPlacesDispo());
+				    System.out.println("(r)etour (v)endre");
+				    System.out.println("Place Libre" + s.nbPlacesDispo());
 				    switch (sc.nextLine()) {
 				    case "r":
 					loop2 = false;
@@ -399,7 +399,7 @@ public class ProgrammationSemaine implements Serializable {
 				    }
 				}
 			    } catch (PasDeSeanceException e) {
-				System.out.println("Il n'y a pas de séance pour ce film");
+				System.out.println("il n'y a pas de seance pour ce film");
 			    }
 			    break;
 			}
@@ -415,7 +415,7 @@ public class ProgrammationSemaine implements Serializable {
 		    PieceTheatre p = (PieceTheatre) Spectacle.choisirSpectacle(this.pieces());
 		    loop3 = true;
 		    while (loop3) {
-			System.out.println(" r(etour) \n c(hoisir séance)");
+			System.out.println("(r)etour (c)hoisir seance");
 			switch (sc.nextLine()) {
 			case "r":
 			    loop2 = false;
@@ -426,8 +426,8 @@ public class ProgrammationSemaine implements Serializable {
 				SeanceTheatre s = (SeanceTheatre) programation(p).choisirSeance();
 				loop2 = true;
 				while (loop2) {
-				    System.out.println(" r(etour) \n v(endre)");
-				    System.out.println("Places Libre : " + s.nbPlacesDispo());
+				    System.out.println("(r)etour (v)endre");
+				    System.out.println("Place Libre" + s.nbPlacesDispo());
 				    switch (sc.nextLine()) {
 				    case "r":
 					loop2 = false;
@@ -439,14 +439,14 @@ public class ProgrammationSemaine implements Serializable {
 				    }
 				}
 			    } catch (PasDeSeanceException e) {
-				System.out.println("Il n'y a pas de scéance pour cette pièce");
+				System.out.println("il n'y a pas de sceance pour cette piece");
 			    }
 			    break;
 			}
 
 		    }
 		} catch (PasDeSpectacleException e) {
-		    System.out.println("Il n'y a pas de pièce");
+		    System.out.println("il n'y a pas de piece");
 		}
 		break;
 	    case "r":

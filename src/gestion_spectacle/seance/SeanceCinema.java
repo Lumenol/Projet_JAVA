@@ -89,12 +89,12 @@ public class SeanceCinema extends Seance {
 	int nbPlace = -1;
 	StringTokenizer toka;
 	do {
-	    System.out.println(" n(ormal) \n t(arif réduit) \n r(etour)");
+	    System.out.println("(n)ormal (t)arif-reduit (r)etour");
 	    switch (sc.nextLine()) {
 	    case "n":
 		do {
-		    System.out.println("Places disponibles : " + nbPlacesDispo());
-		    System.out.println("Combien voulez-vous en vendre ?");
+		    System.out.println("Place disponible : " + nbPlacesDispo());
+		    System.out.println("Combient voulez-vous en vendre ?");
 		    toka = new StringTokenizer(sc.nextLine());
 		    if (toka.hasMoreTokens()) {
 			try {
@@ -108,8 +108,8 @@ public class SeanceCinema extends Seance {
 
 	    case "t":
 		do {
-		    System.out.println("Places disponibles : " + nbPlacesDispo());
-		    System.out.println("Combien voulez-vous en vendre ?");
+		    System.out.println("Place disponible : " + nbPlacesDispo());
+		    System.out.println("Combient voulez-vous en vendre ?");
 		    toka = new StringTokenizer(sc.nextLine());
 		    if (toka.hasMoreTokens()) {
 			try {
@@ -132,14 +132,14 @@ public class SeanceCinema extends Seance {
     @Override
     public void vendrePlacesTN(int nbre) throws IllegalArgumentException {
 	if (nbPlacesDispo() < nbre) {
-	    throw new IllegalArgumentException("Nombre de places insuffisant");
+	    throw new IllegalArgumentException("Nombre de place insuffisant");
 	}
 	super.vendrePlacesTN(nbre);
     }
 
     public void vendrePlacesTR(int nbre) throws IllegalArgumentException {
 	if (nbPlacesDispo() < nbre) {
-	    throw new IllegalArgumentException("Nombre de places insuffisant");
+	    throw new IllegalArgumentException("Nombre de place insuffisant");
 	}
 	nbPlacesVenduesTR += nbre;
     }
