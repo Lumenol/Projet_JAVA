@@ -30,6 +30,10 @@ public class SeanceTheatre extends Seance {
 	return getNbPlacesVenduesTN() * salleTheatre.getTarif() + nbFauteuilsVendus * salleTheatre.getPrixFauteuil();
     }
 
+    public int getNbFauteuilsVendus() {
+	return nbFauteuilsVendus;
+    }
+
     public int nbFauteuilsDispo() {
 	return salleTheatre.getNbFauteuils() - nbFauteuilsVendus;
 

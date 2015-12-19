@@ -191,7 +191,8 @@ public class ProgrammationSemaine implements Serializable {
 				SeanceCinema s = (SeanceCinema) programation(f).choisirSeance();
 				System.out.println("Chiffre affaire : " + s.chiffreAffaire());
 				System.out.println("Taux de remplissage : " + s.tauxRemplissage());
-
+				System.out.println("Place vendu tarif normal : " + s.getNbPlacesVenduesTN());
+				System.out.println("Place vendu tarif réduit : " + s.getNbPlacesVenduesTR());
 			    } catch (PasDeSeanceException e) {
 				System.out.println("il n'y a pas de seance pour ce film");
 			    }
@@ -217,9 +218,11 @@ public class ProgrammationSemaine implements Serializable {
 
 			case "c":
 			    try {
-				SeanceCinema s = (SeanceCinema) programation(p).choisirSeance();
+				SeanceTheatre s = (SeanceTheatre) programation(p).choisirSeance();
 				System.out.println("Chiffre affaire : " + s.chiffreAffaire());
 				System.out.println("Taux de remplissage : " + s.tauxRemplissage());
+				System.out.println("Place vendu tarif normal : " + s.getNbPlacesVenduesTN());
+				System.out.println("Place fauteuils vendu : " + s.getNbFauteuilsVendus());
 
 			    } catch (PasDeSeanceException e) {
 				System.out.println("il n'y a pas de seance pour ce film");

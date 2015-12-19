@@ -48,9 +48,6 @@ public class GestionSpectacle {
 	EnsembleSalle salles = new EnsembleSalle();
 	EnsembleTheatre sallesTheatre = new EnsembleTheatre();
 
-	// salles = EnsembleSalle.ensembleSalle();
-	// sallesTheatre = EnsembleTheatre.ensembleSalleTheatre();
-
 	boolean loop = true, loop2;
 
 	while (loop) {

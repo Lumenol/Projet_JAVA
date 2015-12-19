@@ -55,6 +55,10 @@ public class SeanceCinema extends Seance {
 	return true;
     }
 
+    public int getNbPlacesVenduesTR() {
+	return nbPlacesVenduesTR;
+    }
+
     @Override
     public int nbPlacesDispo() {
 	return salle.getCapacite() - totalVendu();
