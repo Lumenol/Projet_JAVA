@@ -52,7 +52,7 @@ public class GestionSpectacle {
 
 	while (loop) {
 	    System.out.println(
-		    "(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder (d)ebug (salle) (co)nsultation");
+		    "(q)uitter (a)jouter programmation semaine (m)odifier (v)endre (c)harger (s)auvegarder (salle) (co)nsultation");
 	    StringTokenizer toka;
 	    int s = -1;
 	    switch (sc.nextLine()) {
@@ -248,13 +248,6 @@ public class GestionSpectacle {
 		    }
 		}
 		break;
-
-	    case "d":
-		System.out.println(salles);
-		System.out.println(sallesTheatre);
-		System.out.println(lesProgrammations);
-		break;
-
 	    default:
 		break;
 	    }
