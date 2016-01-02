@@ -9,6 +9,15 @@ import java.util.StringTokenizer;
 import gestion_spectacle.exception.PasDeSpectacleException;
 
 public abstract class Spectacle implements Serializable {
+    /**
+     * permet de choisir un spectacle dans un ensemble de manière interactive
+     *
+     * @param ens
+     *            Ensemble de spectacle
+     * @return spectacle sélectionné dans l'ensemble
+     * @throws PasDeSpectacleException
+     *             Ensemble de spectacle vide
+     */
     public static Spectacle choisirSpectacle(Collection<? extends Spectacle> ens) throws PasDeSpectacleException {
 	if (ens == null || ens.isEmpty()) {
 	    throw new PasDeSpectacleException();
@@ -35,6 +44,12 @@ public abstract class Spectacle implements Serializable {
 	return (Spectacle) ens.toArray()[index];
     }
 
+    /**
+     * demande le titre et les interprètes d'un spectacle pour crée des film ou
+     * des pièces
+     *
+     * @return [0] le titre [1] les interprètes
+     */
     protected static String[] spectacle() {
 	Scanner sc = new Scanner(System.in);
 	String[] r = new String[2];

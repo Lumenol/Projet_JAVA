@@ -9,7 +9,15 @@ import gestion_spectacle.salle.EnsembleSalle;
 import gestion_spectacle.salle.Salle;
 
 public class SeanceCinema extends Seance {
-
+    /**
+     * crée une séance de cinéma par saisie interactive
+     * 
+     * @param ens
+     *            ensemble de salle
+     * @return Séance de spectacle
+     * @throws PasDeSalleException
+     *             ensemble de salle vide
+     */
     public static SeanceCinema seanceCinema(EnsembleSalle ens) throws PasDeSalleException {
 	Object[] seance = Seance.seance();
 	return new SeanceCinema((Heure) seance[0], (int) seance[1], ens.choisirSalle());
@@ -141,6 +149,14 @@ public class SeanceCinema extends Seance {
 	super.vendrePlacesTN(nbre);
     }
 
+    /**
+     * vend des place au tarif réduit
+     * 
+     * @param nbre
+     *            nombre de place vendu
+     * @throws IllegalArgumentException
+     *             si on veux vendre plus de place que le nombre disponible
+     */
     public void vendrePlacesTR(int nbre) throws IllegalArgumentException {
 	if (nbPlacesDispo() < nbre) {
 	    throw new IllegalArgumentException("Nombre de place insuffisant");

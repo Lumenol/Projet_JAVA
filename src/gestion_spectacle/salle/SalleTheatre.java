@@ -4,7 +4,11 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class SalleTheatre extends Salle {
-
+    /**
+     * crée une salle de théâtre par saisie interactive
+     * 
+     * @return
+     */
     public static SalleTheatre salleTheatre() {
 	Scanner sc = new Scanner(System.in);
 	Salle salle = salle();

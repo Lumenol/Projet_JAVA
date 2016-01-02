@@ -5,9 +5,14 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import gestion_spectacle.Heure;
-import gestion_spectacle.salle.EnsembleSalle;
 
 public abstract class Seance implements Comparable<Seance>, Serializable {
+    /**
+     * demande le jour et l'heure d'une séance pour crée des séances de cinéma
+     * ou de théâtre
+     *
+     * @return [0] objet de type Heure [1] entier pour le jour
+     */
     protected static Object[] seance() {
 	Scanner sc = new Scanner(System.in);
 	Object[] r = new Object[2];
@@ -60,9 +65,17 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
 	nbPlacesVenduesTN = 0;
     }
 
+    /**
+     * retourne le chiffre d'affaire d'un séance
+     *
+     * @return chiffre d'affaire
+     */
     public abstract double chiffreAffaire();
 
     @Override
+    /**
+     * Tri par ordre chronologique
+     */
     public int compareTo(Seance o) {
 	if (jour < o.jour) {
 	    return -1;
@@ -107,10 +120,18 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
 	return result;
     }
 
+    /**
+     * @return nombre de place disponible
+     */
     public abstract int nbPlacesDispo();
 
     public abstract String nomSalle();
 
+    /**
+     * donne le taux de remplissage en pourcentage
+     *
+     * @return
+     */
     public abstract double tauxRemplissage();
 
     @Override
@@ -118,10 +139,23 @@ public abstract class Seance implements Comparable<Seance>, Serializable {
 	return "Seance [jour=" + jour + ", nbPlacesVenduesTN=" + nbPlacesVenduesTN + ", horaire=" + horaire + "]";
     }
 
+    /**
+     *
+     * @return nombre de place vendu au total
+     */
     public abstract int totalVendu();
 
+    /**
+     * permet de vendre des place de manière interactive
+     */
     public abstract void vendre();
 
+    /**
+     * vend des place au tarif normal
+     * 
+     * @param nbre
+     *            nombre de place a vendre
+     */
     public void vendrePlacesTN(int nbre) {
 	nbPlacesVenduesTN += nbre;
     }

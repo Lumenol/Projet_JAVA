@@ -11,6 +11,13 @@ public class ProgrammationFilm extends Programmation<SeanceCinema> {
     public ProgrammationFilm() {
     }
 
+    /**
+     * retourne les séances pour un jour et une heure donnée
+     * 
+     * @param jour
+     * @param heure
+     * @return ensemble de séance trouve
+     */
     public TreeSet<SeanceCinema> seances(int jour, Heure heure) {
 	TreeSet<SeanceCinema> set = new TreeSet<SeanceCinema>();
 	Iterator<SeanceCinema> it = iterator();
@@ -26,6 +33,13 @@ public class ProgrammationFilm extends Programmation<SeanceCinema> {
 
     }
 
+    /**
+     * taux de remplissage pour un jour et une heure
+     * 
+     * @param jour
+     * @param h
+     * @return taux en pourcentage
+     */
     public double tauxRemplissage(int jour, Heure h) {
 	return tauxRemplissage(seances(jour, h));
     }

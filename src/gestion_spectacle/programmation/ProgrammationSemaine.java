@@ -1,11 +1,5 @@
 package gestion_spectacle.programmation;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,22 +20,19 @@ import gestion_spectacle.spectacle.PieceTheatre;
 import gestion_spectacle.spectacle.Spectacle;
 
 public class ProgrammationSemaine implements Serializable {
-
-    static public ProgrammationSemaine charger(String nomFichier) throws FileNotFoundException, IOException {
-	ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomFichier));
-	Object obj;
-	try {
-	    obj = ois.readObject();
-	    if (obj.getClass() != ProgrammationSemaine.class) {
-		obj = null;
-	    }
-	} catch (ClassNotFoundException e) {
-	    obj = null;
-	}
-	ois.close();
-	return (ProgrammationSemaine) obj;
-    }
-
+    /**
+     * crée une programmation pour une semaine par saisie interactive
+     *
+     * @param semaine
+     *            numéro de la semaine
+     * @param salles
+     *            ensemble des salle standard
+     * @param theatre
+     *            ensemble des salles de cinéma
+     * @return programmation de la semaine
+     * @throws PasDeSalleException
+     *             si il n'y a pas de salle standard n'y de salle de théâtres
+     */
     public static ProgrammationSemaine programmationSemaine(int semaine, EnsembleSalle salles, EnsembleTheatre theatre)
 	    throws PasDeSalleException {
 	if ((salles == null || salles.isEmpty()) && (theatre == null || theatre.isEmpty())) {
@@ -83,6 +74,13 @@ public class ProgrammationSemaine implements Serializable {
 
     private int semaine;
 
+    /**
+     *
+     * @param semaine
+     *            numéro de la semaine de 0 à 52
+     * @throws IllegalArgumentException
+     *             si le numéro n'est pas entre 0 et 52
+     */
     public ProgrammationSemaine(int semaine) throws IllegalArgumentException {
 	if (semaine < 0 || semaine >= 52) {
 	    throw new IllegalArgumentException("numero de semaine incorrecte");
@@ -92,6 +90,14 @@ public class ProgrammationSemaine implements Serializable {
 
     }
 
+    /**
+     * programme un film par saisie interactive
+     *
+     * @param salles
+     *            ensemble de salle standard
+     * @throws PasDeSalleException
+     *             si il n'y a pas de salle
+     */
     public void ajouterFilm(EnsembleSalle salles) throws PasDeSalleException {
 	if (salles.isEmpty()) {
 	    throw new PasDeSalleException();
@@ -115,6 +121,14 @@ public class ProgrammationSemaine implements Serializable {
 
     }
 
+    /**
+     * programme une pièce par saisi interactive
+     *
+     * @param salles
+     *            ensemble de salle de théâtre
+     * @throws PasDeSalleException
+     *             si il n'y a pas de salle
+     */
     public void ajouterPiece(EnsembleTheatre salles) throws PasDeSalleException {
 	if (salles.isEmpty()) {
 	    throw new PasDeSalleException();
@@ -137,35 +151,88 @@ public class ProgrammationSemaine implements Serializable {
 	}
     }
 
+    /**
+     * ajoute une programmation de film a un film a la programmation de la
+     * semaine
+     *
+     * @param film
+     * @param p
+     *            programmation de film
+     * @return vrai si a été ajouté sinon faux
+     */
     public boolean ajouterProgrammation(Film film, ProgrammationFilm p) {
 	return ajouterProgrammation((Spectacle) film, p);
     }
 
+    /**
+     * ajoute une programmation de théatre a une pièce
+     *
+     * @param piece
+     * @param p
+     *            programmation de théatre
+     * @return vrai si ajouté sinon faux
+     */
     public boolean ajouterProgrammation(PieceTheatre piece, ProgrammationTheatre p) {
 
 	return ajouterProgrammation((Spectacle) piece, p);
     }
 
+    /**
+     * ajoute une séance a un film
+     *
+     * @param f
+     *            film
+     * @param s
+     *            séance
+     */
     public void ajouterSeance(Film f, SeanceCinema s) {
 	ajouterProgrammation(f, new ProgrammationFilm());
 	ajouterSeance((Spectacle) f, s);
     }
 
+    /**
+     * ajoute une séance a une pièce
+     *
+     * @param p
+     *            pièce
+     * @param s
+     *            séance
+     */
     public void ajouterSeance(PieceTheatre p, SeanceTheatre s) {
 	ajouterProgrammation(p, new ProgrammationTheatre());
 	ajouterSeance((Spectacle) p, s);
     }
 
+    /**
+     * recherche un film par son titre
+     *
+     * @param titre
+     * @return film si trouve
+     */
     public ProgrammationFilm chercherFilm(String titre) {
 
 	return (ProgrammationFilm) chercher(titre, films());
     }
 
+    /**
+     * recherche une pièce par son titre
+     *
+     * @param titre
+     *            titre
+     * @return pièce si trouve
+     */
     public ProgrammationTheatre chercherPiece(String titre) {
 
 	return (ProgrammationTheatre) chercher(titre, pieces());
     }
 
+    /**
+     * permet de consulter l'ensemble de la programmation de la semaine de
+     * manière interactive
+     *
+     * @throws PasDeSpectacleException
+     *             si il n'y a pas de spectacle programme cette semaine
+     */
     public void consultation() throws PasDeSpectacleException {
 	if (films().isEmpty() && pieces().isEmpty()) {
 	    throw new PasDeSpectacleException("Il n'y a pas de spectacle dans cette programmation");
@@ -263,6 +330,10 @@ public class ProgrammationSemaine implements Serializable {
 	return true;
     }
 
+    /**
+     *
+     * @return ensemble de films programmer cette semaine
+     */
     public LinkedList<Film> films() {
 	LinkedList<Film> film = new LinkedList<Film>();
 	for (Spectacle sp : programation.keySet()) {
@@ -282,6 +353,14 @@ public class ProgrammationSemaine implements Serializable {
 	return result;
     }
 
+    /**
+     * permet de modifier la programmation de la semaine de manière interactive
+     *
+     * @param salles
+     *            ensemble salle standard
+     * @param theatre
+     *            ensemble salle théâtre
+     */
     public void modification(EnsembleSalle salles, EnsembleTheatre theatre) {
 	boolean loop = true, loop2, loop3;
 	Scanner sc = new Scanner(System.in);
@@ -405,6 +484,11 @@ public class ProgrammationSemaine implements Serializable {
 	} while (loop);
     }
 
+    /**
+     * ensemble des pièce de théâtre programmer cette semaine
+     *
+     * @return ensemble de pièce
+     */
     public LinkedList<PieceTheatre> pieces() {
 	LinkedList<PieceTheatre> piece = new LinkedList<PieceTheatre>();
 	for (Spectacle sp : programation.keySet()) {
@@ -415,20 +499,36 @@ public class ProgrammationSemaine implements Serializable {
 	return piece;
     }
 
+    /**
+     * retourne la programmation associer a un film
+     *
+     * @param f
+     *            film
+     * @return programmation
+     */
     public ProgrammationFilm programation(Film f) {
 	return (ProgrammationFilm) programation.get(f);
     }
 
-    public ProgrammationTheatre programation(PieceTheatre f) {
-	return (ProgrammationTheatre) programation.get(f);
+    /**
+     * retourne la programmation associer a une pièce
+     *
+     * @param p
+     *            pièce
+     * @return
+     */
+    public ProgrammationTheatre programation(PieceTheatre p) {
+	return (ProgrammationTheatre) programation.get(p);
     }
 
-    public void sauvegarder(String nomFichier) throws FileNotFoundException, IOException {
-	ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomFichier));
-	oos.writeObject(this);
-	oos.close();
-    }
-
+    /**
+     * supprimer une séance associer a un spectacle
+     *
+     * @param sp
+     *            spectacle
+     * @param se
+     *            séance
+     */
     public void supprimerSeance(Spectacle sp, Seance se) {
 	if (programation.containsKey(sp)) {
 	    programation.get(sp).supprimer(se);
@@ -444,6 +544,13 @@ public class ProgrammationSemaine implements Serializable {
 	return b.toString();
     }
 
+    /**
+     * permet de vendre des place pour les spectacle de la semaine de manière
+     * interactive
+     *
+     * @throws PasDeSpectacleException
+     *             si il n'y a pas de spectacle programmer
+     */
     public void vendre() throws PasDeSpectacleException {
 	if (films().isEmpty() && pieces().isEmpty()) {
 	    throw new PasDeSpectacleException();
@@ -540,6 +647,15 @@ public class ProgrammationSemaine implements Serializable {
 	} while (loop);
     }
 
+    /**
+     * ajoute une programmation a un spectacle
+     *
+     * @param s
+     *            spectacle
+     * @param p
+     *            programmation
+     * @return vrai si associe sinon faux
+     */
     private boolean ajouterProgrammation(Spectacle s, Programmation p) {
 	if (!programation.containsKey(s)) {
 	    programation.put(s, p);
@@ -549,10 +665,27 @@ public class ProgrammationSemaine implements Serializable {
 	}
     }
 
+    /**
+     * ajoute une séance a un spectacle
+     *
+     * @param sp
+     *            spectacle
+     * @param se
+     *            séance
+     */
     private void ajouterSeance(Spectacle sp, Seance se) {
 	programation.get(sp).ajouter(se);
     }
 
+    /**
+     * cherche un spectacle avec son titre dans la collection c
+     *
+     * @param titre
+     *            titre
+     * @param c
+     *            collection de spectacle
+     * @return spectacle trouve
+     */
     private Programmation chercher(String titre, Collection<? extends Spectacle> c) {
 	for (Spectacle spectacle : c) {
 	    if (spectacle.getTitre().equals(titre)) {

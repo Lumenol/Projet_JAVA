@@ -45,6 +45,10 @@ public class SeanceTheatre extends Seance {
 	return nbFauteuilsDispo() + nbPlaceStandardDispo();
     }
 
+    /**
+     * 
+     * @return nombre de place standard disponible
+     */
     public int nbPlaceStandardDispo() {
 	return salleTheatre.getNbPlacesStandard() - getNbPlacesVenduesTN();
     }
@@ -119,6 +123,13 @@ public class SeanceTheatre extends Seance {
 	} while (loop);
     }
 
+    /**
+     * 
+     * @param nbre
+     *            nombre de place
+     * @throws IllegalArgumentException
+     *             si il n'y a pas suffisamment de fauteuils
+     */
     public void vendrePlacesFauteuil(int nbre) throws IllegalArgumentException {
 	if (nbFauteuilsDispo() < nbre) {
 	    throw new IllegalArgumentException("Nombre de fauteuil insuffisant");

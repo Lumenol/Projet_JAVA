@@ -5,6 +5,11 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Salle implements Serializable {
+    /**
+     * crée une salle par saisie interactive
+     * 
+     * @return Salle crée
+     */
     public static Salle salle() {
 	Scanner sc = new Scanner(System.in);
 	String nomSalle;

@@ -4,6 +4,11 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class PieceTheatre extends Spectacle {
+    /**
+     * crée une pièce de théâtre par saisie interactive
+     *
+     * @return la pièce de théâtre crée
+     */
     public static PieceTheatre pieceTheatre() {
 	String[] spectacle = Spectacle.spectacle();
 	Scanner sc = new Scanner(System.in);

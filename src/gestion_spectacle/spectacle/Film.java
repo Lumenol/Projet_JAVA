@@ -6,6 +6,11 @@ import java.util.StringTokenizer;
 import gestion_spectacle.Heure;
 
 public class Film extends Spectacle {
+    /**
+     * crée un film par saisie interactive
+     * 
+     * @return le film crée
+     */
     public static Film film() {
 	String[] spectacle = Spectacle.spectacle();
 	Scanner sc = new Scanner(System.in);

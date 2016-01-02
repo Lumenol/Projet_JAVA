@@ -18,6 +18,10 @@ public abstract class Programmation<T extends Seance> implements Iterable<T>, Se
 	seances.add(s);
     }
 
+    /**
+     *
+     * @return chiffre d'affaire de toutes les séance d'un spectacle
+     */
     public double chiffreAffaire() {
 	double chiffreAffaire = 0;
 	for (T seance : seances) {
@@ -27,6 +31,13 @@ public abstract class Programmation<T extends Seance> implements Iterable<T>, Se
 
     }
 
+    /**
+     * permet de sélectionner une séance dans l'ensemble
+     *
+     * @return séance de la programmation sélectionné
+     * @throws PasDeSeanceException
+     *             si il n'y a pas de séance de programmée
+     */
     public Seance choisirSeance() throws PasDeSeanceException {
 	if (seances.isEmpty()) {
 	    throw new PasDeSeanceException();
@@ -88,6 +99,13 @@ public abstract class Programmation<T extends Seance> implements Iterable<T>, Se
 	return seances.iterator();
     }
 
+    /**
+     * retourne les séance d'un jour donné
+     * 
+     * @param jour
+     *            jour voulu
+     * @return ensemble de séance programme pour ce jour
+     */
     public TreeSet<T> seances(int jour) {
 	TreeSet<T> set = new TreeSet<T>();
 	Iterator<T> it = seances.iterator();
@@ -117,6 +135,13 @@ public abstract class Programmation<T extends Seance> implements Iterable<T>, Se
 	return b.toString();
     }
 
+    /**
+     * donne le taux de remplissage d'une programmation
+     * 
+     * @param c
+     *            collection de séance
+     * @return taux en pourcentage
+     */
     protected double tauxRemplissage(Collection<T> c) {
 	double taux = 0;
 	for (Iterator iterator = c.iterator(); iterator.hasNext();) {

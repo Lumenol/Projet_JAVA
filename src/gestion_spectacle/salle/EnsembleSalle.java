@@ -10,23 +10,11 @@ import java.util.StringTokenizer;
 import gestion_spectacle.exception.PasDeSalleException;
 
 public class EnsembleSalle implements Iterable, Serializable {
-    // static public EnsembleSalle charger(String nomFichier) throws
-    // FileNotFoundException, IOException {
-    // ObjectInputStream ois = new ObjectInputStream(new
-    // FileInputStream(nomFichier));
-    // Object obj;
-    // try {
-    // obj = ois.readObject();
-    // if (obj.getClass() != EnsembleSalle.class) {
-    // obj = null;
-    // }
-    // } catch (ClassNotFoundException e) {
-    // obj = null;
-    // }
-    // ois.close();
-    // return (EnsembleSalle) obj;
-    // }
-
+    /**
+     * crée un ensemble de salle par saisie interactive
+     * 
+     * @return ensemble de salle
+     */
     public static EnsembleSalle ensembleSalle() {
 	Scanner sc = new Scanner(System.in);
 	boolean loop = true;
@@ -62,6 +50,13 @@ public class EnsembleSalle implements Iterable, Serializable {
 	salles.add(salle);
     }
 
+    /**
+     * Permet de sélectionner une salle dans l'ensemble par saisie interactive
+     * 
+     * @return Salle sélectionner
+     * @throws PasDeSalleException
+     *             si l'ensemble est vide
+     */
     public Salle choisirSalle() throws PasDeSalleException {
 	if (salles == null || salles.isEmpty()) {
 	    throw new PasDeSalleException();
@@ -133,18 +128,6 @@ public class EnsembleSalle implements Iterable, Serializable {
 	}
 	return null;
     }
-
-    // public void sauvegarder(String nomFichier) throws FileNotFoundException,
-    // IOException {
-    // ObjectOutputStream oos = new ObjectOutputStream(new
-    // FileOutputStream(nomFichier));
-    // oos.writeObject(this);
-    // oos.close();
-    // }
-    //
-    // public int size() {
-    // return salles.size();
-    // }
 
     @Override
     public String toString() {

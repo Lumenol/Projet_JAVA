@@ -25,6 +25,20 @@ public class GestionSpectacle {
 
     public static Scanner sc = new Scanner(System.in);
 
+    /**
+     * permet de charger un type de donne a partir d'un fichier un seul objet
+     * par fichier
+     * 
+     * @param nomFichier
+     *            nom du fichier
+     * @param c
+     *            classe a charger
+     * @return retourne l'objet chargé
+     * @throws FileNotFoundException
+     *             si fichier introuvable
+     * @throws DonneIntrouvableExecption
+     *             si l'objet chercher est introuvable
+     */
     static public Serializable charger(String nomFichier, Class<Serializable> c)
 	    throws FileNotFoundException, IOException, DonneIntrouvableExecption {
 	ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomFichier));
@@ -254,6 +268,14 @@ public class GestionSpectacle {
 	}
     }
 
+    /**
+     * permet de sauvegarde un objet dans un fichier
+     * 
+     * @param nomFichier
+     *            nom du fichier
+     * @param obj
+     *            objet à sauvegarder
+     */
     public static void sauvegarder(String nomFichier, Serializable obj) throws FileNotFoundException, IOException {
 	ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomFichier));
 	oos.writeObject(obj);
